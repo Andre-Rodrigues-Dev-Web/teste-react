@@ -18,6 +18,26 @@ const saveNews = async (news: News[]) => {
     encoding: "utf8",
   });
 };
+const searchNewsForID = async (
+  id: string,
+): Promise<{ newsList: News[]; foundNews: News }> => {
+  const newsList = await getNews();
+
+  if (newsList.length === 0) {
+    throw new RepositoryError(
+      `There are no saved News`,
+      RepositoryErrorType.Empty,
+    );
+  }
+  let foundNews = newsList.find((news) => news.id === id);
+  if (!foundNews) {
+    throw new RepositoryError(
+      `No news with ID ${id} found`,
+      RepositoryErrorType.NotFound,
+    );
+  }
+  return { newsList, foundNews };
+};
 export const createSampleNews = async () => {
   await saveNews(sampleNews as News[]);
 };
@@ -52,23 +72,15 @@ export const addNews = async (news: NewsBody) => {
   return savedNews;
 };
 export const updateNews = async (id: string, newsBody: NewsBody) => {
-  const newsList = await getNews();
-  if (newsList.length === 0) {
-    throw new RepositoryError(
-      `There are no saved News`,
-      RepositoryErrorType.Empty,
-    );
-  }
-  let foundNews = newsList.find((news) => news.id === id);
-  if (!foundNews) {
-    throw new RepositoryError(
-      `No news with ID ${id} found`,
-      RepositoryErrorType.NotFound,
-    );
-  }
-  // update updatedAt
+  let { newsList, foundNews } = await searchNewsForID(id);
   foundNews = { ...foundNews, ...newsBody, updatedAt: unixTimestamp() };
   const updatedNews = [...newsList.filter((news) => news.id !== id), foundNews];
   await saveNews(updatedNews);
   return foundNews;
+};
+
+export const deleteNews = async (id: string) => {
+  const { newsList } = await searchNewsForID(id);
+  let filteredList = newsList.filter((news) => news.id !== id);
+  saveNews(filteredList);
 };

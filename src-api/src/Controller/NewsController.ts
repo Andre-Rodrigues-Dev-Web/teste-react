@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   addNews,
   createSampleNews,
+  deleteNews,
   getNews,
   updateNews,
 } from "../Repository/NewsRepository";
@@ -29,5 +30,14 @@ newsController.put("/:id", validateID, validateAddNews, async (req, res) => {
   const { title, author, content } = req.body;
   let news = await updateNews(id, { title, author, content });
   res.status(201).json(news);
+});
+newsController.delete("/:id", validateID, async (req, res) => {
+  const id = req.params["id"];
+  if (!id) {
+    res.status(400).json({ msg: "No ID provided" });
+    return;
+  }
+  await deleteNews(id);
+  res.sendStatus(204);
 });
 export { newsController };
