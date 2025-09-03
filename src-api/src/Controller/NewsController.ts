@@ -7,6 +7,10 @@ import {
   updateNews,
 } from "../Repository/NewsRepository";
 import { validateAddNews, validateID } from "./Middleware/ValidateNews";
+import {
+  RepositoryError,
+  RepositoryErrorType,
+} from "../Repository/RepositoryError";
 const newsController = Router();
 newsController.post("/createSample", async (_, res) => {
   await createSampleNews();
@@ -28,8 +32,26 @@ newsController.put("/:id", validateID, validateAddNews, async (req, res) => {
     return;
   }
   const { title, author, content } = req.body;
-  let news = await updateNews(id, { title, author, content });
-  res.status(201).json(news);
+  try {
+    let news = await updateNews(id, { title, author, content });
+    res.status(201).json(news);
+  } catch (error) {
+    if (error instanceof RepositoryError) {
+      let status: number;
+      const { message, errorType } = error;
+      if (
+        errorType === RepositoryErrorType.Empty ||
+        errorType === RepositoryErrorType.NotFound
+      ) {
+        status = 404;
+      } else {
+        status = 400;
+      }
+      res.status(status).json({ message, errorType });
+    } else {
+      throw error;
+    }
+  }
 });
 newsController.delete("/:id", validateID, async (req, res) => {
   const id = req.params["id"];
@@ -37,7 +59,25 @@ newsController.delete("/:id", validateID, async (req, res) => {
     res.status(400).json({ msg: "No ID provided" });
     return;
   }
-  await deleteNews(id);
-  res.sendStatus(204);
+  try {
+    await deleteNews(id);
+    res.sendStatus(204);
+  } catch (error) {
+    if (error instanceof RepositoryError) {
+      let status: number;
+      const { message, errorType } = error;
+      if (
+        errorType === RepositoryErrorType.Empty ||
+        errorType === RepositoryErrorType.NotFound
+      ) {
+        status = 404;
+      } else {
+        status = 400;
+      }
+      res.status(status).json({ message, errorType });
+    } else {
+      throw error;
+    }
+  }
 });
 export { newsController };
