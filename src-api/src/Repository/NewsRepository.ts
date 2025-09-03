@@ -1,15 +1,16 @@
 import { readFile, writeFile } from "fs/promises";
-import { newsFileLocation } from "../util";
+import { newsFileLocation, unixTimestamp } from "../util";
 import sampleNews from "../sampleNews.json";
 import { News } from "../Model/News";
 import { v4 as uuid } from "uuid";
+import { RepositoryError, RepositoryErrorType } from "./RepositoryError";
 const newsPath = newsFileLocation();
-
 interface NewsBody {
   title: string;
   author: string;
   content: string;
 }
+
 const saveNews = async (news: News[]) => {
   news.sort((a, b) => a.createdAt - b.createdAt);
   let newsJsonString = JSON.stringify(news);
@@ -38,7 +39,7 @@ export const getNews = async () => {
 
 export const addNews = async (news: NewsBody) => {
   const id = uuid();
-  const createdAt = Math.floor(new Date().getTime() / 1000);
+  const createdAt = unixTimestamp();
   const savedNews: News = {
     id,
     createdAt,
@@ -49,4 +50,25 @@ export const addNews = async (news: NewsBody) => {
   const newsList = [...(await getNews()), savedNews];
   await saveNews(newsList);
   return savedNews;
+};
+export const updateNews = async (id: string, newsBody: NewsBody) => {
+  const newsList = await getNews();
+  if (newsList.length === 0) {
+    throw new RepositoryError(
+      `There are no saved News`,
+      RepositoryErrorType.Empty,
+    );
+  }
+  let foundNews = newsList.find((news) => news.id === id);
+  if (!foundNews) {
+    throw new RepositoryError(
+      `No news with ID ${id} found`,
+      RepositoryErrorType.NotFound,
+    );
+  }
+  // update updatedAt
+  foundNews = { ...foundNews, ...newsBody, updatedAt: unixTimestamp() };
+  const updatedNews = [...newsList.filter((news) => news.id !== id), foundNews];
+  await saveNews(updatedNews);
+  return foundNews;
 };
