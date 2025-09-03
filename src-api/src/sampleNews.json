@@ -1,0 +1,23 @@
+[
+  {
+    "id": "53154d83-8aac-46b3-a2c5-2d787aaacbf4",
+    "title": "Notícia exemplo Nº1",
+    "author": "Autor Exemplo",
+    "createdAt": 1756912307,
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus neque ut massa venenatis placerat. Maecenas sit amet velit eget ex ornare facilisis ac eget dolor. Praesent eleifend nibh sit amet elit ultricies cursus quis sed tortor. Aliquam laoreet dictum felis, non rhoncus justo luctus a. Nam ut ipsum vitae metus ultrices varius sit amet a nunc. Pellentesque ac sagittis lacus. Nunc pharetra mollis magna, a consectetur sapien gravida pulvinar. Vivamus quis semper tellus, quis facilisis tortor. Donec tristique augue sed erat luctus, a iaculis metus iaculis. In pharetra quam lacus, in faucibus dolor mattis sed."
+  },
+  {
+    "id": "106fdef2-bfab-42b0-9e5f-3e646609d212",
+    "title": "Notícia exemplo Nº2",
+    "author": "Autor Exemplo",
+    "createdAt": 1756912307,
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus neque ut massa venenatis placerat. Maecenas sit amet velit eget ex ornare facilisis ac eget dolor. Praesent eleifend nibh sit amet elit ultricies cursus quis sed tortor. Aliquam laoreet dictum felis, non rhoncus justo luctus a. Nam ut ipsum vitae metus ultrices varius sit amet a nunc. Pellentesque ac sagittis lacus. Nunc pharetra mollis magna, a consectetur sapien gravida pulvinar. Vivamus quis semper tellus, quis facilisis tortor. Donec tristique augue sed erat luctus, a iaculis metus iaculis. In pharetra quam lacus, in faucibus dolor mattis sed."
+  },
+  {
+    "id": "f102bd47-4884-44c4-beb1-a1aa14927a4a",
+    "title": "Notícia exemplo Nº3",
+    "author": "Autor Exemplo",
+    "createdAt": 1756912307,
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus neque ut massa venenatis placerat. Maecenas sit amet velit eget ex ornare facilisis ac eget dolor. Praesent eleifend nibh sit amet elit ultricies cursus quis sed tortor. Aliquam laoreet dictum felis, non rhoncus justo luctus a. Nam ut ipsum vitae metus ultrices varius sit amet a nunc. Pellentesque ac sagittis lacus. Nunc pharetra mollis magna, a consectetur sapien gravida pulvinar. Vivamus quis semper tellus, quis facilisis tortor. Donec tristique augue sed erat luctus, a iaculis metus iaculis. In pharetra quam lacus, in faucibus dolor mattis sed."
+  }
+]
