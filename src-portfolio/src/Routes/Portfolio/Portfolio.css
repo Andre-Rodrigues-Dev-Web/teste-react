@@ -1,0 +1,46 @@
+.portfolio {
+  main {
+    > * {
+      background-color: var(--theme-mantle);
+      margin-top: 10px;
+    }
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    .hero {
+      justify-content: center;
+      display: grid;
+      grid-template:
+        "name name name photo"
+        "description download download photo";
+      .photo-container {
+        grid-area: photo;
+        .photo {
+          background-color: var(--theme-surface1);
+          width: 100px;
+          height: 100px;
+        }
+      }
+      .name {
+        grid-area: name;
+      }
+      .description {
+        grid-area: description;
+      }
+      .download {
+        grid-area: download;
+      }
+    }
+    .about {
+      * {
+        .infoItem {
+          .info {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+          }
+        }
+      }
+    }
+  }
+}

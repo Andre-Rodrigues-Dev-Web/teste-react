@@ -1,7 +1,20 @@
+import { Link, Outlet } from "react-router";
 import "./App.css";
 
-function App() {
-  return <h1>Portfólio</h1>;
-}
-
-export default App;
+export const App = () => {
+  return (
+    <div className="app">
+      <header>
+        <ul>
+          <li>
+            <Link to="/">Portfólio</Link>
+          </li>
+          <li>
+            <Link to="/news">Notícias</Link>
+          </li>
+        </ul>
+      </header>
+      <Outlet />
+    </div>
+  );
+};

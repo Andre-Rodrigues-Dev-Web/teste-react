@@ -1,0 +1,33 @@
+.news {
+  .news-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    .labeled-input {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  main {
+    .news-container {
+      .news-item {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        .news-info {
+          div {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            * {
+              display: flex;
+
+              flex-wrap: wrap;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.app {
+  color: var(--theme-text);
+  display: flex;
+  flex-direction: column;
+  header {
+    ul {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+  }
+}
+a {
+  &:link {
+    color: var(--theme-blue);
+  }
+  &:visited {
+    color: var(--theme-mauve);
+  }
+  &:active {
+    color: var(--theme-red);
+  }
+}
