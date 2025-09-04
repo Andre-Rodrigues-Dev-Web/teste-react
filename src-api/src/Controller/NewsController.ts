@@ -3,6 +3,7 @@ import {
   addNews,
   createSampleNews,
   deleteNews,
+  getAllNews,
   getNews,
   updateNews,
 } from "../Repository/NewsRepository";
@@ -17,8 +18,35 @@ newsController.post("/createSample", async (_, res) => {
   res.sendStatus(200);
 });
 newsController.get("/", async (_, res) => {
-  const news = await getNews();
+  const news = await getAllNews();
   res.status(200).json(news);
+});
+newsController.get("/:id", async (req, res) => {
+  const id = req.params["id"];
+  if (!id) {
+    res.status(400).json({ msg: "No ID provided" });
+    return;
+  }
+  try {
+    let news = await getNews(id);
+    res.status(200).json(news);
+  } catch (error) {
+    if (error instanceof RepositoryError) {
+      let status: number;
+      const { message, errorType } = error;
+      if (
+        errorType === RepositoryErrorType.Empty ||
+        errorType === RepositoryErrorType.NotFound
+      ) {
+        status = 404;
+      } else {
+        status = 400;
+      }
+      res.status(status).json({ message, errorType });
+    } else {
+      throw error;
+    }
+  }
 });
 newsController.post("/", validateAddNews, async (req, res) => {
   const { title, author, content } = req.body;

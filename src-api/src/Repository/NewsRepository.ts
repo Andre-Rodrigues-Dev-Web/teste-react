@@ -21,7 +21,7 @@ const saveNews = async (news: News[]) => {
 const searchNewsForID = async (
   id: string,
 ): Promise<{ newsList: News[]; foundNews: News }> => {
-  const newsList = await getNews();
+  const newsList = await getAllNews();
 
   if (newsList.length === 0) {
     throw new RepositoryError(
@@ -41,7 +41,11 @@ const searchNewsForID = async (
 export const createSampleNews = async () => {
   await saveNews(sampleNews as News[]);
 };
-export const getNews = async () => {
+export const getNews = async (id: string) => {
+  const { foundNews } = await searchNewsForID(id);
+  return foundNews;
+};
+export const getAllNews = async () => {
   let news: News[];
   try {
     const newsFile = await readFile(newsPath, { encoding: "utf-8" });
@@ -67,7 +71,7 @@ export const addNews = async (news: NewsBody) => {
     title: news.title,
     author: news.author,
   };
-  const newsList = [...(await getNews()), savedNews];
+  const newsList = [...(await getAllNews()), savedNews];
   await saveNews(newsList);
   return savedNews;
 };
