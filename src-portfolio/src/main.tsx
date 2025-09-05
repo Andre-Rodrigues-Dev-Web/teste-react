@@ -7,6 +7,7 @@ import { News } from "./Routes/News/News.tsx";
 import "@fontsource-variable/roboto";
 import { App } from "./App.tsx";
 import "./darkTheme.css";
+import "./lightTheme.css";
 import { SingleNews } from "./Routes/SingleNews/SingleNews.tsx";
 
 createRoot(document.getElementById("root")!).render(
