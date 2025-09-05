@@ -1,30 +1,140 @@
 .news {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   .news-form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    .labeled-input {
+    .collapse {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--theme-base);
+      padding: 16px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      border-radius: 8px 8px 0 0;
+      &:hover {
+        cursor: pointer;
+      }
+      .collapse-indicator {
+        padding: 4px;
+        background-color: var(--theme-text);
+        color: var(--theme-base);
+        border-radius: 16px;
+      }
+    }
+    .collapsible-form {
+      border-radius: 0 0 8px 8px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      background-color: var(--theme-base);
+      display: none;
+      &.open {
+        display: flex;
+      }
+      fieldset {
+        padding: 0;
+        padding: 16px;
+        display: flex;
+        width: 100%;
+        border: none;
+      }
+      .labeled-input {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        margin-right: 16px;
+        label {
+          font-size: 1.1rem;
+          font-weight: bold;
+          padding-bottom: 4px;
+        }
+        input,
+        textarea {
+          color: var(--theme-text);
+          background-color: var(--theme-mantle);
+          resize: none;
+          border: none;
+          width: 100%;
+          padding: 16px;
+          border-radius: 8px;
+          box-shadow: 0px 0px 40px 2px inset rgba(0, 0, 0, 0.2);
+        }
+      }
+      button {
+        background-color: var(--theme-blue);
+        color: black;
+        padding: 16px;
+        align-self: center;
+        margin-bottom: 16px;
+        border-radius: 16px;
+        font-weight: bold;
+        border: none;
+      }
     }
   }
   main {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    .published-news {
+      h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 16px;
+      }
+    }
     .news-container {
+      display: grid;
+      justify-content: center;
+      gap: 16px;
+      @media (max-width: 700px) {
+        grid-template-columns: 90%;
+      }
+      @media (min-width: 701px) and (max-width: 1100px) {
+        grid-template-columns: 45% 45%;
+      }
+      @media (min-width: 1101px) {
+        grid-template-columns: 30% 30% 30%;
+      }
       .news-item {
         display: flex;
         flex-direction: column;
         gap: 8px;
+        text-decoration: none;
+        color: var(--theme-text);
+        background-color: var(--theme-base);
+        padding: 16px;
+        border-radius: 8px;
         .news-info {
-          div {
+          .news-title-row {
+            h2 {
+              font-size: 1.3rem;
+            }
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            .delete-news {
+              border: none;
+              background-color: var(--theme-surface1);
+              color: var(--theme-text);
+              padding: 8px;
+              border-radius: 4px;
+            }
+          }
+          .news-authorship {
             display: flex;
             gap: 4px;
             align-items: center;
-            * {
-              display: flex;
-
-              flex-wrap: wrap;
-            }
+            flex-wrap: wrap;
+            color: var(--theme-subtext0);
           }
         }
       }
