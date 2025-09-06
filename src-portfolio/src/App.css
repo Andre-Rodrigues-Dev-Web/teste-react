@@ -13,6 +13,11 @@
       display: flex;
       gap: 6rem;
       justify-content: center;
+      li {
+        a {
+          text-decoration: none;
+        }
+      }
     }
     .themes {
       background-color: var(--theme-base);
