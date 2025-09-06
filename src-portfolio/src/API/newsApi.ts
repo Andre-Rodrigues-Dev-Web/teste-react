@@ -12,13 +12,23 @@ export const getNews = async (id: string): Promise<News> => {
   const response = await newsInstance.get(`/${id}`);
   return response.data as News;
 };
-export const addNews = async (newsBody: {
-  author: string;
-  title: string;
-  content: string;
-}) => {
-  return (await newsInstance.post("/", newsBody)).data as News;
+export const addNews = async (
+  newsBody: {
+    author: string;
+    title: string;
+    content: string;
+  },
+  token: string,
+) => {
+  console.log(token);
+  return (
+    await newsInstance.post("/", newsBody, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+  ).data as News;
 };
-export const deleteNews = async (id: string) => {
-  await newsInstance.delete(`/${id}`);
+export const deleteNews = async (id: string, token: string) => {
+  await newsInstance.delete(`/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 };

@@ -3,17 +3,17 @@ import "./News.css";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import "dayjs/locale/pt-br";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { addNews, deleteNews, getAllNews } from "../../API/newsApi";
 import type { News } from "../../Entities/News";
 import { Link } from "react-router";
 import { AxiosError } from "axios";
 import { truncateText } from "../../util";
+import { AuthContext } from "../../Context/AuthContext";
 dayjs.extend(localizedFormat);
 const NewsPage = () => {
   const [news, setNews] = useState<News[]>([]);
   const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -21,13 +21,21 @@ const NewsPage = () => {
   const [saveError, setSaveError] = useState<string | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [showNewForm, setShowNewForm] = useState(false);
+  const auth = useContext(AuthContext);
   const onSave = async () => {
+    if (!auth.userInfo) return;
     setSaving(true);
     setSaveError(null);
     try {
-      const saved = await addNews({ title, author, content });
+      const saved = await addNews(
+        {
+          title,
+          author: auth.userInfo.name,
+          content,
+        },
+        auth.userInfo.token,
+      );
       setNews([saved, ...news]);
-      setAuthor("");
       setTitle("");
       setContent("");
       setShowNewForm(false);
@@ -41,8 +49,9 @@ const NewsPage = () => {
     setSaving(false);
   };
   const onDelete = (id: string) => {
+    if (!auth.userInfo) return;
     setDeleteError(null);
-    deleteNews(id)
+    deleteNews(id, auth.userInfo.token)
       .then(() => {
         setNews(news.filter((news) => news.id !== id));
       })
@@ -73,96 +82,88 @@ const NewsPage = () => {
     <div className="news">
       <main>
         <h1> Notícias</h1>
-        <form
-          className="news-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
-          <div
-            className="collapse"
-            onClick={() => {
-              setShowNewForm(!showNewForm);
+        {auth.userInfo ? (
+          <form
+            className="news-form"
+            onSubmit={(e) => {
+              e.preventDefault();
             }}
           >
-            <div className="collapse-indicator">
-              {showNewForm ? <FaCaretDown /> : <FaCaretRight />}
-            </div>
-            Nova Notícia
-          </div>
-          <div className={`collapsible-form ${showNewForm ? "open" : ""}`}>
-            <fieldset>
-              <div className="labeled-input">
-                <label htmlFor="title-input">Título</label>
-                <input
-                  id="title-input"
-                  className="title-input"
-                  value={title}
-                  placeholder="Título"
-                  onChange={(e) => {
-                    setTitle(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="labeled-input">
-                <label htmlFor="author-input">Autor</label>
-                <input
-                  id="author-input"
-                  className="author-input"
-                  value={author}
-                  placeholder="Autor"
-                  onChange={(e) => {
-                    setAuthor(e.target.value);
-                  }}
-                />
-              </div>
-            </fieldset>
-            <fieldset>
-              <div className="labeled-input">
-                <label htmlFor="content-input">Conteúdo</label>
-                <textarea
-                  id="content-input"
-                  className="content-input"
-                  value={content}
-                  placeholder="Texto da notícia"
-                  rows={6}
-                  onChange={(e) => {
-                    setContent(e.target.value);
-                  }}
-                />
-              </div>
-            </fieldset>
-            <button
-              type="submit"
+            <div
+              className="collapse"
               onClick={() => {
-                onSave().catch((e) => {
-                  console.error(e);
-                });
+                setShowNewForm(!showNewForm);
               }}
             >
-              Salvar
-            </button>
-          </div>
+              <div className="collapse-indicator">
+                {showNewForm ? <FaCaretDown /> : <FaCaretRight />}
+              </div>
+              Nova Notícia
+            </div>
+            <div className={`collapsible-form ${showNewForm ? "open" : ""}`}>
+              <fieldset>
+                <div className="labeled-input">
+                  <label htmlFor="title-input">Título</label>
+                  <input
+                    id="title-input"
+                    className="title-input"
+                    value={title}
+                    placeholder="Título"
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                    }}
+                  />
+                </div>
+              </fieldset>
+              <fieldset>
+                <div className="labeled-input">
+                  <label htmlFor="content-input">Conteúdo</label>
+                  <textarea
+                    id="content-input"
+                    className="content-input"
+                    value={content}
+                    placeholder="Texto da notícia"
+                    rows={6}
+                    onChange={(e) => {
+                      setContent(e.target.value);
+                    }}
+                  />
+                </div>
+              </fieldset>
+              <button
+                type="submit"
+                onClick={() => {
+                  onSave().catch((e) => {
+                    console.error(e);
+                  });
+                }}
+              >
+                Salvar
+              </button>
+            </div>
 
-          {saving ? (
-            <div>Salvando...</div>
-          ) : saveError ? (
-            <>
-              <div>Erro ao salvar notícia:</div>
-              <code>{saveError}</code>
-            </>
-          ) : (
-            <></>
-          )}
-          {deleteError ? (
-            <>
-              <div>Erro ao deletar notícia:</div>
-              <code>{deleteError}</code>
-            </>
-          ) : (
-            <></>
-          )}
-        </form>
+            {saving ? (
+              <div>Salvando...</div>
+            ) : saveError ? (
+              <>
+                <div>Erro ao salvar notícia:</div>
+                <code>{saveError}</code>
+              </>
+            ) : (
+              <></>
+            )}
+            {deleteError ? (
+              <>
+                <div>Erro ao deletar notícia:</div>
+                <code>{deleteError}</code>
+              </>
+            ) : (
+              <></>
+            )}
+          </form>
+        ) : (
+          <>Faça login para publicar notícias</>
+        )}
         <div className="published-news">
           <h2>Notícias Publicadas</h2>
           <div className="news-container">
