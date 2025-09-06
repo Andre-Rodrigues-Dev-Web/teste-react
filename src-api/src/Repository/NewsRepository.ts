@@ -14,7 +14,7 @@ interface NewsBody {
 }
 
 const saveNews = async (news: News[]) => {
-  news.sort((a, b) => a.createdAt - b.createdAt);
+  news.sort((a, b) => b.createdAt - a.createdAt);
   let newsJsonString = JSON.stringify(news);
   await writeFile(newsPath, newsJsonString, {
     encoding: "utf8",
