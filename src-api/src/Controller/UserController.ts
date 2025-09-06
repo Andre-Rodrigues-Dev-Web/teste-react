@@ -16,8 +16,8 @@ userController.post(
       return;
     }
     let passwordHash = await bcrypt.hash(password, 10);
-    await addUser({ name, username, passwordHash });
-    res.locals["payload"] = { username, name };
+    let addedUser = await addUser({ name, username, passwordHash });
+    res.locals["payload"] = { username, name, id: addedUser.id };
     next();
   },
   createToken,

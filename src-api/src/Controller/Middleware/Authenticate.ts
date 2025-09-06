@@ -18,11 +18,11 @@ export const authenticate = async (
     return;
   }
   const token = split[1];
-
-  jwt.verify(token || "", jwtSecret(), (error, _) => {
+  jwt.verify(token || "", jwtSecret(), (error, payload) => {
     if (error) {
       res.status(401).json({ error });
     } else {
+      res.locals["user"] = payload;
       next();
     }
   });

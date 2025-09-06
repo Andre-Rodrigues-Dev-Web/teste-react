@@ -1,10 +1,10 @@
 import { Router } from "express";
 import {
   addNews,
-  createSampleNews,
   deleteNews,
   getAllNews,
   getNews,
+  newsBelongsToUser,
   updateNews,
 } from "../Repository/NewsRepository";
 import { validateAddNews, validateID } from "./Middleware/ValidateNews";
@@ -14,10 +14,6 @@ import {
 } from "../Repository/RepositoryError";
 import { authenticate } from "./Middleware/Authenticate";
 const newsController = Router();
-newsController.post("/createSample", async (_, res) => {
-  await createSampleNews();
-  res.sendStatus(200);
-});
 newsController.get("/", async (_, res) => {
   const news = await getAllNews();
   res.status(200).json(news);
@@ -50,8 +46,13 @@ newsController.get("/:id", async (req, res) => {
   }
 });
 newsController.post("/", authenticate, validateAddNews, async (req, res) => {
-  const { title, author, content } = req.body;
-  let news = await addNews({ title, author, content });
+  const { title, content } = req.body;
+  const author = res.locals["user"];
+  let news = await addNews({
+    title,
+    author,
+    content,
+  });
   res.status(201).json(news);
 });
 newsController.put(
@@ -60,14 +61,19 @@ newsController.put(
   validateID,
   validateAddNews,
   async (req, res) => {
-    const id = req.params["id"];
-    if (!id) {
+    const newsID = req.params["id"];
+    if (!newsID) {
       res.status(400).json({ msg: "No ID provided" });
       return;
     }
-    const { title, author, content } = req.body;
+    const { title, content } = req.body;
+    const { id: authorID } = res.locals["user"];
+    if (!(await newsBelongsToUser(newsID, authorID))) {
+      res.status(403).json({ msg: "This news belongs to another user" });
+      return;
+    }
     try {
-      let news = await updateNews(id, { title, author, content });
+      let news = await updateNews(newsID, { title, content });
       res.status(201).json(news);
     } catch (error) {
       if (error instanceof RepositoryError) {
@@ -89,13 +95,18 @@ newsController.put(
   },
 );
 newsController.delete("/:id", authenticate, validateID, async (req, res) => {
-  const id = req.params["id"];
-  if (!id) {
+  const newsID = req.params["id"];
+  if (!newsID) {
     res.status(400).json({ msg: "No ID provided" });
     return;
   }
+  const { id: authorID } = res.locals["user"];
+  if (!(await newsBelongsToUser(newsID, authorID))) {
+    res.status(403).json({ msg: "This news belongs to another user" });
+    return;
+  }
   try {
-    await deleteNews(id);
+    await deleteNews(newsID);
     res.sendStatus(204);
   } catch (error) {
     if (error instanceof RepositoryError) {

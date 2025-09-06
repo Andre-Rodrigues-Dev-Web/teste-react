@@ -2,7 +2,8 @@ import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import { jwtSecret } from "../../util";
 export const createToken = (_: Request, res: Response) => {
-  const payload: { name: string; username: string } = res.locals["payload"];
+  const payload: { name: string; username: string; id: string } =
+    res.locals["payload"];
   jwt.sign(payload, jwtSecret(), (error, encoded) => {
     if (error) {
       res.status(500).json({ error });
@@ -13,6 +14,7 @@ export const createToken = (_: Request, res: Response) => {
         token: encoded,
         username: payload.username,
         name: payload.name,
+        id: payload.id,
       });
       return;
     }

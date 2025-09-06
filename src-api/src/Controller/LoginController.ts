@@ -38,7 +38,11 @@ loginController.post(
     }
     let result = await bcrypt.compare(password, user.passwordHash);
     if (result) {
-      res.locals["payload"] = { username: user.username, name: user.name };
+      res.locals["payload"] = {
+        username: user.username,
+        name: user.name,
+        id: user.id,
+      };
       next();
     } else {
       res.status(400).json({ msg: "Wrong password" });

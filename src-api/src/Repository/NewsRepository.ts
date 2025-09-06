@@ -1,13 +1,15 @@
 import { readFile, writeFile } from "fs/promises";
 import { newsFileLocation, unixTimestamp } from "../util";
-import sampleNews from "../sampleNews.json";
 import { News } from "../Model/News";
 import { v4 as uuid } from "uuid";
 import { RepositoryError, RepositoryErrorType } from "./RepositoryError";
 const newsPath = newsFileLocation();
 interface NewsBody {
   title: string;
-  author: string;
+  author: {
+    id: string;
+    name: string;
+  };
   content: string;
 }
 
@@ -38,9 +40,6 @@ const searchNewsForID = async (
   }
   return { newsList, foundNews };
 };
-export const createSampleNews = async () => {
-  await saveNews(sampleNews as News[]);
-};
 export const getNews = async (id: string) => {
   const { foundNews } = await searchNewsForID(id);
   return foundNews;
@@ -60,7 +59,13 @@ export const getAllNews = async () => {
   }
   return news;
 };
-
+export const newsBelongsToUser = async (
+  newsID: string,
+  userID: string,
+): Promise<boolean> => {
+  const news = await searchNewsForID(newsID);
+  return news.foundNews.author.id === userID;
+};
 export const addNews = async (news: NewsBody) => {
   const id = uuid();
   const createdAt = unixTimestamp();
@@ -75,7 +80,10 @@ export const addNews = async (news: NewsBody) => {
   await saveNews(newsList);
   return savedNews;
 };
-export const updateNews = async (id: string, newsBody: NewsBody) => {
+export const updateNews = async (
+  id: string,
+  newsBody: { title: string; content: string },
+) => {
   let { newsList, foundNews } = await searchNewsForID(id);
   foundNews = { ...foundNews, ...newsBody, updatedAt: unixTimestamp() };
   const updatedNews = [...newsList.filter((news) => news.id !== id), foundNews];
