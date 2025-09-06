@@ -62,7 +62,7 @@ export const Login = ({ newAccount }: { newAccount?: boolean }) => {
           <label htmlFor="password-input">Senha</label>
           <input
             id="password-input"
-            type="text"
+            type="password"
             value={password}
             placeholder="Senha"
             onChange={(e) => {
