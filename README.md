@@ -12,7 +12,7 @@ npm i
 npm run start
 ```
 
-O local onde fica salvo o arquivo `news.json`, no qual ficam salvas as notícias, é por padrão na pasta home do usuário (`~/news.json`). Isso pode ser alterado configurando a variável de ambiente `NEWS_JSON_PATH`, fornecendo-a um caminho dentro de um diretório existente.
+O local onde fica salvo o arquivo `news.json`, no qual ficam salvas as notícias, é por padrão na pasta home do usuário (`~/news.json`). Isso pode ser alterado configurando a variável de ambiente `NEWS_JSON_PATH`, fornecendo-a um caminho dentro de um **diretório existente**.
 
 Por exemplo:
 
