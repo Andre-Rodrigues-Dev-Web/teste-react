@@ -118,16 +118,25 @@
             h2 {
               font-size: 1.3rem;
             }
+            .action-buttons {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 4px;
+              .action-button {
+                border: none;
+                background-color: var(--theme-surface1);
+                color: var(--theme-text);
+                padding: 8px;
+                border-radius: 4px;
+                &:hover {
+                  cursor: pointer;
+                }
+              }
+            }
             display: flex;
             justify-content: space-between;
             align-items: start;
-            .delete-news {
-              border: none;
-              background-color: var(--theme-surface1);
-              color: var(--theme-text);
-              padding: 8px;
-              border-radius: 4px;
-            }
           }
           .news-authorship {
             display: flex;

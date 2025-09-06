@@ -1,4 +1,10 @@
-import { FaCaretDown, FaCaretRight, FaCircle, FaTrash } from "react-icons/fa6";
+import {
+  FaCaretDown,
+  FaCaretRight,
+  FaCircle,
+  FaPenToSquare,
+  FaTrash,
+} from "react-icons/fa6";
 import "./News.css";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
@@ -10,6 +16,8 @@ import { Link } from "react-router";
 import { AxiosError } from "axios";
 import { truncateText } from "../../util";
 import { AuthContext } from "../../Context/AuthContext";
+import { useNavigate } from "react-router";
+
 dayjs.extend(localizedFormat);
 const NewsPage = () => {
   const [news, setNews] = useState<News[]>([]);
@@ -22,6 +30,7 @@ const NewsPage = () => {
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [showNewForm, setShowNewForm] = useState(false);
   const auth = useContext(AuthContext);
+  const navigate = useNavigate();
   const onSave = async () => {
     if (!auth.userInfo) return;
     setSaving(true);
@@ -184,16 +193,30 @@ const NewsPage = () => {
                   <div className="news-info">
                     <div className="news-title-row">
                       <h2>{news.title}</h2>
-                      <button
-                        className="delete-news"
-                        type="button"
-                        onClick={(e) => {
-                          onDelete(news.id);
-                          e.preventDefault();
-                        }}
-                      >
-                        <FaTrash size={"1rem"} />
-                      </button>
+                      <div className="action-buttons">
+                        <button
+                          className="action-button"
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            navigate(`/news/${news.id}/edit`);
+                          }}
+                        >
+                          <FaPenToSquare />
+                        </button>
+                        <button
+                          className="action-button"
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            onDelete(news.id);
+                          }}
+                        >
+                          <FaTrash />
+                        </button>
+                      </div>
                     </div>
                     <div className="news-authorship">
                       <div className="author">{news.author}</div>
