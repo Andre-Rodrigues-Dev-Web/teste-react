@@ -8,6 +8,7 @@ import { addNews, deleteNews, getAllNews } from "../../API/newsApi";
 import type { News } from "../../Entities/News";
 import { Link } from "react-router";
 import { AxiosError } from "axios";
+import { truncateText } from "../../util";
 dayjs.extend(localizedFormat);
 const NewsPage = () => {
   const [news, setNews] = useState<News[]>([]);
@@ -68,9 +69,6 @@ const NewsPage = () => {
       });
     setLoading(false);
   }, []);
-  const truncateText = (text: string, length: number) => {
-    return text.length > length ? `${text.slice(0, length - 1)}...` : text;
-  };
   return (
     <div className="news">
       <main>
