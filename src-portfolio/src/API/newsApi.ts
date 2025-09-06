@@ -1,7 +1,6 @@
 import axios from "axios";
 import type { News } from "../Entities/News";
 interface NewsBody {
-  author: string;
   title: string;
   content: string;
 }

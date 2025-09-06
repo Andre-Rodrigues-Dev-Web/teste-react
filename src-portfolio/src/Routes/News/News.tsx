@@ -39,7 +39,6 @@ const NewsPage = () => {
       const saved = await addNews(
         {
           title,
-          author: auth.userInfo.name,
           content,
         },
         auth.userInfo.token,
@@ -193,33 +192,37 @@ const NewsPage = () => {
                   <div className="news-info">
                     <div className="news-title-row">
                       <h2>{news.title}</h2>
-                      <div className="action-buttons">
-                        <button
-                          className="action-button"
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            navigate(`/news/${news.id}/edit`);
-                          }}
-                        >
-                          <FaPenToSquare />
-                        </button>
-                        <button
-                          className="action-button"
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            onDelete(news.id);
-                          }}
-                        >
-                          <FaTrash />
-                        </button>
-                      </div>
+                      {!auth.userInfo || news.author.id !== auth.userInfo.id ? (
+                        <></>
+                      ) : (
+                        <div className="action-buttons">
+                          <button
+                            className="action-button"
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              navigate(`/news/${news.id}/edit`);
+                            }}
+                          >
+                            <FaPenToSquare />
+                          </button>
+                          <button
+                            className="action-button"
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              onDelete(news.id);
+                            }}
+                          >
+                            <FaTrash />
+                          </button>
+                        </div>
+                      )}
                     </div>
                     <div className="news-authorship">
-                      <div className="author">{news.author}</div>
+                      <div className="author">{news.author.name}</div>
                       <div className="separator">
                         <FaCircle size={"0.2rem"} />
                       </div>

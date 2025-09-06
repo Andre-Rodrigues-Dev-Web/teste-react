@@ -28,11 +28,7 @@ export const EditNews = () => {
       return;
     }
 
-    updateNews(
-      id,
-      { title, content, author: auth.userInfo.name },
-      auth.userInfo.token,
-    )
+    updateNews(id, { title, content }, auth.userInfo.token)
       .then(() => {
         navigate(`/news/${id}`);
       })

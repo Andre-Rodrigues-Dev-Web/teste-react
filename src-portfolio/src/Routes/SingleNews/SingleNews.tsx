@@ -60,7 +60,7 @@ export const SingleNews = () => {
               <div className="info-row">
                 <div className="author">
                   <FaUser />
-                  {news.author}
+                  {news.author.name}
                 </div>
                 <div className="created-date">
                   <FaCalendar />
