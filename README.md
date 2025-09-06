@@ -12,12 +12,26 @@ npm i
 npm run start
 ```
 
-O local onde fica salvo o aquivo `news.json`, no qual ficam salvas as notícias, é por padrão na pasta home do usuário (`~/news.json`). Isso pode ser alterado configurando a variável de ambiente `NEWS_JSON_PATH`, fornecendo-a um caminho.
+O local onde fica salvo o arquivo `news.json`, no qual ficam salvas as notícias, é por padrão na pasta home do usuário (`~/news.json`). Isso pode ser alterado configurando a variável de ambiente `NEWS_JSON_PATH`, fornecendo-a um caminho dentro de um diretório existente.
 
 Por exemplo:
 
 ```sh
 NEWS_JSON_PATH="~/teste-react/news.json" npm run start
+```
+
+O mesmo vale pro arquivo de usuários, `users.json`, que pode ser alterado usando a variável `USERS_JSON_PATH`.
+
+Por exemplo:
+
+```sh
+USERS_JSON_PATH="~/teste-react/users.json" npm run start
+```
+
+O "secret" utilizado pela biblioteca `jsonwebtoken`, que por padrão está exposto no código por motivos de demonstração, também é configurável pela variável `JWT_SECRET`.
+
+```sh
+JWT_SECRET="ChaveSecreta" npm run start
 ```
 
 ### Portfólio
