@@ -4,9 +4,16 @@ import type { News } from "../../Entities/News";
 import { getNews } from "../../API/newsApi";
 import { AxiosError } from "axios";
 import dayjs from "dayjs";
+import "./SingleNews.css";
 
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import "dayjs/locale/pt-br";
+import {
+  FaCalendar,
+  FaNewspaper,
+  FaPenToSquare,
+  FaUser,
+} from "react-icons/fa6";
 dayjs.extend(localizedFormat);
 export const SingleNews = () => {
   const { id } = useParams();
@@ -38,27 +45,40 @@ export const SingleNews = () => {
     });
   }, [id]);
   return (
-    <div className="singleNews">
+    <div className="single-news">
       {loading ? (
         <div className="loading"></div>
       ) : error ? (
         <code>{error}</code>
       ) : news ? (
         <main>
-          <h1>{news.title}</h1>
-          <div className="author">{news.author}</div>
-          <div className="created-date">
-            {dayjs.unix(news.createdAt).locale("pt-br").format("LLL")}
-          </div>
-          {news.updatedAt ? (
-            <div className="updated-date">
-              {"Editado " +
-                dayjs.unix(news.updatedAt).locale("pt-br").format("LLL")}
+          <div className="news-container">
+            <div className="news-header">
+              <h1 className="news-title">
+                <FaNewspaper /> {news.title}
+              </h1>
+              <div className="info-row">
+                <div className="author">
+                  <FaUser />
+                  {news.author}
+                </div>
+                <div className="created-date">
+                  <FaCalendar />
+                  {dayjs.unix(news.createdAt).locale("pt-br").format("LLL")}
+                </div>
+                {news.updatedAt ? (
+                  <div className="updated-date">
+                    <FaPenToSquare />
+                    {"Editado " +
+                      dayjs.unix(news.updatedAt).locale("pt-br").format("LLL")}
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
-          ) : (
-            <></>
-          )}
-          <span>{news.content}</span>
+            <span className="news-content">{news.content}</span>
+          </div>
         </main>
       ) : (
         <></>
