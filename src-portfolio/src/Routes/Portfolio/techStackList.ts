@@ -4,6 +4,7 @@ import { FaCode, FaDesktop, FaServer } from "react-icons/fa6";
 interface TechStackItem {
   name: string;
   svg: string;
+  adaptive?: boolean;
 }
 
 interface TechStackList {
@@ -56,10 +57,12 @@ const backEndList: TechStackList = {
     {
       name: "Deno",
       svg: "deno",
+      adaptive: true,
     },
     {
       name: "Rust",
       svg: "rust",
+      adaptive: true,
     },
     {
       name: "Python",
@@ -76,10 +79,12 @@ const backEndList: TechStackList = {
     {
       name: "Express(JS)",
       svg: "express",
+      adaptive: true,
     },
     {
       name: "Apollo GraphQL",
       svg: "apollo",
+      adaptive: true,
     },
   ],
 };
@@ -90,6 +95,7 @@ const dbList: TechStackList = {
     {
       name: "MySQL",
       svg: "mysql",
+      adaptive: true,
     },
     {
       name: "Microsft SQL Server (MSSQL)",
@@ -97,7 +103,7 @@ const dbList: TechStackList = {
     },
     {
       name: "SQLite",
-      svg: "rust",
+      svg: "sqlite",
     },
     {
       name: "MongoDB",
@@ -116,6 +122,7 @@ const devOpsList: TechStackList = {
     {
       name: "Github",
       svg: "github",
+      adaptive: true,
     },
     {
       name: "BitBucket",

@@ -118,7 +118,11 @@ export const Portfolio = () => {
                   <ul>
                     {stack.items.map((item) => (
                       <li key={item.name}>
-                        <TechStackItem name={item.name} icon={item.svg} />
+                        <TechStackItem
+                          name={item.name}
+                          icon={item.svg}
+                          adaptive={item.adaptive}
+                        />
                       </li>
                     ))}
                   </ul>
