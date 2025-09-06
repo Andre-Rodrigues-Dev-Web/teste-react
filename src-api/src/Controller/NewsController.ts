@@ -12,6 +12,7 @@ import {
   RepositoryError,
   RepositoryErrorType,
 } from "../Repository/RepositoryError";
+import { authenticate } from "./Middleware/Authenticate";
 const newsController = Router();
 newsController.post("/createSample", async (_, res) => {
   await createSampleNews();
@@ -48,40 +49,46 @@ newsController.get("/:id", async (req, res) => {
     }
   }
 });
-newsController.post("/", validateAddNews, async (req, res) => {
+newsController.post("/", authenticate, validateAddNews, async (req, res) => {
   const { title, author, content } = req.body;
   let news = await addNews({ title, author, content });
   res.status(201).json(news);
 });
-newsController.put("/:id", validateID, validateAddNews, async (req, res) => {
-  const id = req.params["id"];
-  if (!id) {
-    res.status(400).json({ msg: "No ID provided" });
-    return;
-  }
-  const { title, author, content } = req.body;
-  try {
-    let news = await updateNews(id, { title, author, content });
-    res.status(201).json(news);
-  } catch (error) {
-    if (error instanceof RepositoryError) {
-      let status: number;
-      const { message, errorType } = error;
-      if (
-        errorType === RepositoryErrorType.Empty ||
-        errorType === RepositoryErrorType.NotFound
-      ) {
-        status = 404;
-      } else {
-        status = 400;
-      }
-      res.status(status).json({ message, errorType });
-    } else {
-      throw error;
+newsController.put(
+  "/:id",
+  authenticate,
+  validateID,
+  validateAddNews,
+  async (req, res) => {
+    const id = req.params["id"];
+    if (!id) {
+      res.status(400).json({ msg: "No ID provided" });
+      return;
     }
-  }
-});
-newsController.delete("/:id", validateID, async (req, res) => {
+    const { title, author, content } = req.body;
+    try {
+      let news = await updateNews(id, { title, author, content });
+      res.status(201).json(news);
+    } catch (error) {
+      if (error instanceof RepositoryError) {
+        let status: number;
+        const { message, errorType } = error;
+        if (
+          errorType === RepositoryErrorType.Empty ||
+          errorType === RepositoryErrorType.NotFound
+        ) {
+          status = 404;
+        } else {
+          status = 400;
+        }
+        res.status(status).json({ message, errorType });
+      } else {
+        throw error;
+      }
+    }
+  },
+);
+newsController.delete("/:id", authenticate, validateID, async (req, res) => {
   const id = req.params["id"];
   if (!id) {
     res.status(400).json({ msg: "No ID provided" });
