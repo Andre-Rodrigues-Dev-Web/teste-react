@@ -1,15 +1,23 @@
 .theme-button {
-  height: 25px;
-  width: 25px;
-  border: 1px solid var(--theme-text);
+  height: 30px;
+  width: 30px;
+  border: 1px solid var(--theme-surface2);
   border-radius: 50%;
   cursor: pointer;
-  &.theme-light {
+  transition: all 0.2s;
+  background-color: inherit;
+  color: var(--theme-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &.theme-light:hover {
     background-color: #dce0e8;
     color: #df8e1d;
+    border: none;
   }
-  &.theme-dark {
+  &.theme-dark:hover {
     background-color: #181926;
     color: #cad3f5;
+    border: none;
   }
 }

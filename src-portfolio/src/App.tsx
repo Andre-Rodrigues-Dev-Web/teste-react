@@ -67,18 +67,20 @@ export const App = () => {
             </ul>
             <div className="header-right">
               <div className="themes">
-                <span>Mudar tema</span>
                 <div className="theme-options">
-                  <ThemeSwitcher
-                    Icon={FaSun}
-                    themeName="light"
-                    onClick={onThemeChange}
-                  />
-                  <ThemeSwitcher
-                    Icon={FaMoon}
-                    themeName="dark"
-                    onClick={onThemeChange}
-                  />
+                  {theme === "dark" ? (
+                    <ThemeSwitcher
+                      Icon={FaSun}
+                      themeName="light"
+                      onClick={onThemeChange}
+                    />
+                  ) : (
+                    <ThemeSwitcher
+                      Icon={FaMoon}
+                      themeName="dark"
+                      onClick={onThemeChange}
+                    />
+                  )}
                 </div>
               </div>
               <AccountLoginIndicator />
