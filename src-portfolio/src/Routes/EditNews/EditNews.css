@@ -1,7 +1,10 @@
 .edit-news {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  gap: 16px;
+
+  align-items: center;
   form {
     background-color: var(--theme-base);
     padding: 32px min(64px, 10%);
@@ -62,5 +65,8 @@
         }
       }
     }
+  }
+  .status {
+    width: clamp(20rem, 90%, 40rem);
   }
 }

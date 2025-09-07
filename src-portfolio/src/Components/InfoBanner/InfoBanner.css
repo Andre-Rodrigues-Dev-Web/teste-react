@@ -1,0 +1,36 @@
+.info-banner {
+  background-color: var(--theme-blue);
+  border-radius: 4px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  .info-header {
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    gap: 8px;
+  }
+  .info-content {
+    font-weight: 500;
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+  &.note {
+    background-color: var(--theme-base);
+    color: var(--theme-text);
+  }
+  &.information {
+    background-color: var(--theme-blue);
+    color: var(--theme-mantle);
+  }
+  &.warning {
+    background-color: var(--theme-yellow);
+    color: var(--theme-mantle);
+  }
+  &.error {
+    background-color: var(--theme-red);
+    color: var(--theme-mantle);
+  }
+}

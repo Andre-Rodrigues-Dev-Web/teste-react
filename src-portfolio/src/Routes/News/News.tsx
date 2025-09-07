@@ -13,10 +13,10 @@ import { useContext, useEffect, useState } from "react";
 import { addNews, deleteNews, getAllNews } from "../../API/newsApi";
 import type { News } from "../../Entities/News";
 import { Link } from "react-router";
-import { AxiosError } from "axios";
-import { truncateText } from "../../util";
+import { parseAPIError, truncateText } from "../../util";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router";
+import { InfoBanner } from "../../Components/InfoBanner/InfoBanner";
 
 dayjs.extend(localizedFormat);
 const NewsPage = () => {
@@ -48,11 +48,7 @@ const NewsPage = () => {
       setContent("");
       setShowNewForm(false);
     } catch (e) {
-      if (e instanceof AxiosError && e.response) {
-        setSaveError(JSON.stringify(e.response.data));
-      } else {
-        setSaveError(JSON.stringify(e));
-      }
+      setSaveError(parseAPIError(e));
     }
     setSaving(false);
   };
@@ -64,11 +60,7 @@ const NewsPage = () => {
         setNews(news.filter((news) => news.id !== id));
       })
       .catch((e) => {
-        if (e instanceof AxiosError && e.response) {
-          setError(JSON.stringify(e.response.data));
-        } else {
-          setError(JSON.stringify(e));
-        }
+        setDeleteError(parseAPIError(e));
       });
   };
   useEffect(() => {
@@ -78,14 +70,11 @@ const NewsPage = () => {
         setNews(value);
       })
       .catch((e) => {
-        if (e instanceof AxiosError && e.response) {
-          setError(JSON.stringify(e.response.data));
-        } else {
-          setError(JSON.stringify(e));
-        }
+        setError(parseAPIError(e));
       });
     setLoading(false);
   }, []);
+
   return (
     <div className="news">
       <main>
@@ -98,7 +87,7 @@ const NewsPage = () => {
             }}
           >
             <div
-              className="collapse"
+              className={`collapse ${!showNewForm ? "closed" : ""}`}
               onClick={() => {
                 setShowNewForm(!showNewForm);
               }}
@@ -149,111 +138,129 @@ const NewsPage = () => {
             {saving ? (
               <div>Salvando...</div>
             ) : saveError ? (
-              <>
-                <div>Erro ao salvar notícia:</div>
-                <code>{saveError}</code>
-              </>
+              <InfoBanner
+                level="error"
+                title="Erro ao salvar notícia"
+                content={saveError}
+              />
             ) : (
               <></>
             )}
             {deleteError ? (
-              <>
-                <div>Erro ao deletar notícia:</div>
-                <code>{deleteError}</code>
-              </>
+              <InfoBanner
+                level="error"
+                title="Erro ao deletar notícia"
+                content={deleteError}
+              />
             ) : (
               <></>
             )}
           </form>
         ) : (
-          <>Faça login para publicar notícias</>
+          <InfoBanner
+            level="note"
+            title="Não é possível publicar notícias no momento"
+            content="Faça login para escrever e publicar notícias."
+          />
         )}
         <div className="published-news">
           <h2>Notícias Publicadas</h2>
-          <div className="news-container">
-            {loading ? (
-              <div>Carregando...</div>
-            ) : error ? (
-              <>
-                <div>Erro ao carregar notícias:</div>
-                <code>{error}</code>
-              </>
-            ) : (
-              news.map((news) => (
-                <Link
-                  to={`/news/${news.id}`}
-                  className="news-item"
-                  key={news.id}
-                >
-                  <div className="news-info">
-                    <div className="news-title-row">
-                      <h2>{news.title}</h2>
-                      {!auth.userInfo || news.author.id !== auth.userInfo.id ? (
-                        <></>
-                      ) : (
-                        <div className="action-buttons">
-                          <button
-                            className="action-button"
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              e.preventDefault();
-                              navigate(`/news/${news.id}/edit`);
-                            }}
-                          >
-                            <FaPenToSquare />
-                          </button>
-                          <button
-                            className="action-button"
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              e.preventDefault();
-                              onDelete(news.id);
-                            }}
-                          >
-                            <FaTrash />
-                          </button>
+          {loading ? (
+            <div>Carregando...</div>
+          ) : error ? (
+            <>
+              <InfoBanner
+                level="error"
+                title="Erro ao carregar notícias"
+                content={error}
+              />
+            </>
+          ) : news.length === 0 ? (
+            <InfoBanner
+              level="information"
+              title="Sem notícias"
+              content="Não há notícias publicadas."
+            />
+          ) : (
+            <>
+              <div className="news-container">
+                {news.map((news) => (
+                  <Link
+                    to={`/news/${news.id}`}
+                    className="news-item"
+                    key={news.id}
+                  >
+                    <div className="news-info">
+                      <div className="news-title-row">
+                        <h2>{news.title}</h2>
+                        {!auth.userInfo ||
+                        news.author.id !== auth.userInfo.id ? (
+                          <></>
+                        ) : (
+                          <div className="action-buttons">
+                            <button
+                              className="action-button"
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                navigate(`/news/${news.id}/edit`);
+                              }}
+                            >
+                              <FaPenToSquare />
+                            </button>
+                            <button
+                              className="action-button"
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                onDelete(news.id);
+                              }}
+                            >
+                              <FaTrash />
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                      <div className="news-authorship">
+                        <div className="author">{news.author.name}</div>
+                        <div className="separator">
+                          <FaCircle size={"0.2rem"} />
                         </div>
-                      )}
-                    </div>
-                    <div className="news-authorship">
-                      <div className="author">{news.author.name}</div>
-                      <div className="separator">
-                        <FaCircle size={"0.2rem"} />
-                      </div>
-                      <div className="created-date">
-                        {dayjs
-                          .unix(news.createdAt)
-                          .locale("pt-br")
-                          .format("LLL")}
-                      </div>
+                        <div className="created-date">
+                          {dayjs
+                            .unix(news.createdAt)
+                            .locale("pt-br")
+                            .format("LLL")}
+                        </div>
 
-                      {news.updatedAt ? (
-                        <>
-                          <div className="separator">
-                            <FaCircle size={"0.2rem"} />
-                          </div>
-                          <div className="updated-date">
-                            {"Editado " +
-                              dayjs
-                                .unix(news.updatedAt)
-                                .locale("pt-br")
-                                .format("LLL")}
-                          </div>
-                        </>
-                      ) : (
-                        <></>
-                      )}
+                        {news.updatedAt ? (
+                          <>
+                            <div className="separator">
+                              <FaCircle size={"0.2rem"} />
+                            </div>
+                            <div className="updated-date">
+                              {"Editado " +
+                                dayjs
+                                  .unix(news.updatedAt)
+                                  .locale("pt-br")
+                                  .format("LLL")}
+                            </div>
+                          </>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                  <div className="content">
-                    {truncateText(news.content, 200)}
-                  </div>
-                </Link>
-              ))
-            )}
-          </div>
+                    <div className="content">
+                      {truncateText(news.content, 200)}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </main>
     </div>

@@ -1,7 +1,9 @@
 .login-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 16px;
   form {
     background-color: var(--theme-base);
     padding: 32px min(64px, 10%);
@@ -60,5 +62,8 @@
         }
       }
     }
+  }
+  .status {
+    width: clamp(20rem, 90%, 40rem);
   }
 }

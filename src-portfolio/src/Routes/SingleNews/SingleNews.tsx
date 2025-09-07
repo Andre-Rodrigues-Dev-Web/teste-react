@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import type { News } from "../../Entities/News";
 import { getNews } from "../../API/newsApi";
-import { AxiosError } from "axios";
 import dayjs from "dayjs";
 import "./SingleNews.css";
 
@@ -14,6 +13,8 @@ import {
   FaPenToSquare,
   FaUser,
 } from "react-icons/fa6";
+import { parseAPIError } from "../../util";
+import { InfoBanner } from "../../Components/InfoBanner/InfoBanner";
 dayjs.extend(localizedFormat);
 export const SingleNews = () => {
   const { id } = useParams();
@@ -30,13 +31,7 @@ export const SingleNews = () => {
         const news = await getNews(id);
         setNews(news);
       } catch (error) {
-        if (error instanceof AxiosError) {
-          if (error.response) {
-            setError(JSON.stringify(error.response.data));
-          }
-        } else {
-          setError(JSON.stringify(error));
-        }
+        setError(parseAPIError(error));
       }
       setLoading(false);
     };
@@ -49,7 +44,13 @@ export const SingleNews = () => {
       {loading ? (
         <div className="loading"></div>
       ) : error ? (
-        <code>{error}</code>
+        <div className="error">
+          <InfoBanner
+            level="error"
+            title="Erro ao carregar notícia"
+            content={error}
+          />
+        </div>
       ) : news ? (
         <main>
           <div className="news-container">

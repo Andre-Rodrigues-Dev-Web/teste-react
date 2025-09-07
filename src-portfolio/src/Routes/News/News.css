@@ -17,6 +17,10 @@
       font-weight: bold;
       border-radius: 8px 8px 0 0;
       text-align: center;
+      &.closed {
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      }
       &:hover {
         cursor: pointer;
       }
@@ -34,6 +38,7 @@
       align-items: flex-start;
       background-color: var(--theme-base);
       display: none;
+      margin-bottom: 1rem;
       &.open {
         display: flex;
       }
@@ -71,6 +76,7 @@
         border-radius: 8px;
         font-weight: bold;
         border: none;
+        cursor: pointer;
       }
     }
   }
