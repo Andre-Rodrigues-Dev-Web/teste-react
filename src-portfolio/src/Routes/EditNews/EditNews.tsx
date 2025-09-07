@@ -3,15 +3,15 @@ import "./EditNews.css";
 import { useParams, useNavigate } from "react-router";
 import { getNews, updateNews } from "../../API/newsApi";
 import { AuthContext } from "../../Context/AuthContext";
-import { parseAPIError } from "../../util";
+import { parseAPIError, type APIError } from "../../util";
 import { InfoBanner } from "../../Components/InfoBanner/InfoBanner";
 export const EditNews = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [sendingEdit, setSendingEdit] = useState(false);
-  const [editError, setEditError] = useState<string | null>(null);
+  const [editError, setEditError] = useState<APIError | null>(null);
   const [loading, setLoading] = useState(false);
-  const [loadError, setLoadError] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState<APIError | null>(null);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -56,7 +56,8 @@ export const EditNews = () => {
         <InfoBanner
           level="error"
           title="Erro ao carregar a notícia"
-          content={loadError}
+          content={loadError.message}
+          details={loadError.details}
         />
       ) : (
         <>
@@ -111,7 +112,8 @@ export const EditNews = () => {
               <InfoBanner
                 level="error"
                 title="Erro ao editar notícia"
-                content={editError}
+                content={editError.message}
+                details={editError.details}
               />
             ) : (
               <></>

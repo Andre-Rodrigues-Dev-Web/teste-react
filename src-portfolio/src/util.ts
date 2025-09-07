@@ -3,7 +3,11 @@ import { AxiosError } from "axios";
 export const truncateText = (text: string, length: number) => {
   return text.length > length ? `${text.slice(0, length - 1).trim()}...` : text;
 };
-export const parseAPIError = (e: unknown) => {
+export interface APIError {
+  message: string;
+  details: string;
+}
+export const parseAPIError = (e: unknown): APIError => {
   if (e instanceof AxiosError) {
     if (e.response) {
       const message = `A requisição retornou o status ${e.response.status}.\n`;
@@ -14,13 +18,22 @@ export const parseAPIError = (e: unknown) => {
       } else {
         details = `${JSON.stringify(e.response.data, null, " ")}`;
       }
-      return message + details;
+      return { message, details };
     } else if (e.request) {
-      return `O servidor não respondeu a requisição.\n"${e.message}"\nErro Completo:\n${JSON.stringify(e, null, " ")}`;
+      return {
+        message: `O servidor não respondeu a requisição.`,
+        details: `${e.message}"\nErro Completo:\n${JSON.stringify(e, null, " ")}`,
+      };
     } else {
-      return `Houve um erro ao fazer a requisição.\n"${e.message}"\nErro Completo:\n${JSON.stringify(e, null, " ")}`;
+      return {
+        message: `Houve um erro ao fazer a requisição.`,
+        details: `${e.message}"\nErro Completo:\n${JSON.stringify(e, null, " ")}`,
+      };
     }
   } else {
-    return `Houve um erro inesperado.\n${JSON.stringify(e, null, " ")}`;
+    return {
+      message: `Houve um erro inesperado.`,
+      details: `${JSON.stringify(e, null, " ")}`,
+    };
   }
 };

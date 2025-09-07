@@ -13,7 +13,7 @@ import { useContext, useEffect, useState } from "react";
 import { addNews, deleteNews, getAllNews } from "../../API/newsApi";
 import type { News } from "../../Entities/News";
 import { Link } from "react-router";
-import { parseAPIError, truncateText } from "../../util";
+import { parseAPIError, truncateText, type APIError } from "../../util";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router";
 import { InfoBanner } from "../../Components/InfoBanner/InfoBanner";
@@ -24,10 +24,10 @@ const NewsPage = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<APIError | null>(null);
   const [saving, setSaving] = useState(false);
-  const [saveError, setSaveError] = useState<string | null>(null);
-  const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [saveError, setSaveError] = useState<APIError | null>(null);
+  const [deleteError, setDeleteError] = useState<APIError | null>(null);
   const [showNewForm, setShowNewForm] = useState(false);
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
@@ -141,7 +141,8 @@ const NewsPage = () => {
               <InfoBanner
                 level="error"
                 title="Erro ao salvar notícia"
-                content={saveError}
+                content={saveError.message}
+                details={saveError.details}
               />
             ) : (
               <></>
@@ -150,7 +151,8 @@ const NewsPage = () => {
               <InfoBanner
                 level="error"
                 title="Erro ao deletar notícia"
-                content={deleteError}
+                content={deleteError.message}
+                details={deleteError.details}
               />
             ) : (
               <></>
@@ -172,7 +174,8 @@ const NewsPage = () => {
               <InfoBanner
                 level="error"
                 title="Erro ao carregar notícias"
-                content={error}
+                content={error.message}
+                details={error.details}
               />
             </>
           ) : news.length === 0 ? (

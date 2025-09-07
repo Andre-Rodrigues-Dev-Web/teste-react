@@ -1,6 +1,8 @@
-import type { PropsWithChildren } from "react";
+import { useState, type PropsWithChildren } from "react";
 import "./InfoBanner.css";
 import {
+  FaCaretDown,
+  FaCaretRight,
   FaCircleInfo,
   FaCircleXmark,
   FaTriangleExclamation,
@@ -9,6 +11,7 @@ interface InfoBannerProps {
   level: "note" | "information" | "warning" | "error";
   title: string;
   content: string;
+  details?: string;
 }
 const InfoIcon = ({ level }: { level: string }) => {
   switch (level) {
@@ -27,6 +30,7 @@ const InfoIcon = ({ level }: { level: string }) => {
   }
 };
 export const InfoBanner = (props: PropsWithChildren<InfoBannerProps>) => {
+  const [showDetails, setShowDetails] = useState(false);
   return (
     <div className={`info-banner ${props.level}`}>
       <div className="info-header">
@@ -37,6 +41,28 @@ export const InfoBanner = (props: PropsWithChildren<InfoBannerProps>) => {
       </div>
 
       <div className="info-content">{props.content}</div>
+      {!props.details ? (
+        <></>
+      ) : (
+        <>
+          <div
+            className="collapse-details"
+            onClick={() => {
+              setShowDetails(!showDetails);
+            }}
+          >
+            <div className="collapse-details-icon">
+              {showDetails ? <FaCaretDown /> : <FaCaretRight />}
+            </div>{" "}
+            Detalhes
+          </div>
+          <div
+            className={`collapsible-details ${showDetails ? "open-details" : ""}`}
+          >
+            {props.details}
+          </div>
+        </>
+      )}
     </div>
   );
 };

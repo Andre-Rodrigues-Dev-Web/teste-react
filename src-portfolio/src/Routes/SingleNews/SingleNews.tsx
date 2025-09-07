@@ -13,14 +13,14 @@ import {
   FaPenToSquare,
   FaUser,
 } from "react-icons/fa6";
-import { parseAPIError } from "../../util";
+import { parseAPIError, type APIError } from "../../util";
 import { InfoBanner } from "../../Components/InfoBanner/InfoBanner";
 dayjs.extend(localizedFormat);
 export const SingleNews = () => {
   const { id } = useParams();
   const [news, setNews] = useState<News | null>();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>();
+  const [error, setError] = useState<APIError | null>();
   useEffect(() => {
     const loadNews = async () => {
       if (!id) return;
@@ -48,7 +48,8 @@ export const SingleNews = () => {
           <InfoBanner
             level="error"
             title="Erro ao carregar notícia"
-            content={error}
+            content={error.message}
+            details={error.details}
           />
         </div>
       ) : news ? (

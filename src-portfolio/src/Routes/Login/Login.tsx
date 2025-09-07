@@ -3,14 +3,14 @@ import "./Login.css";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link } from "react-router";
 import { addUser } from "../../API/usersApi";
-import { parseAPIError } from "../../util";
+import { parseAPIError, type APIError } from "../../util";
 import { InfoBanner } from "../../Components/InfoBanner/InfoBanner";
 export const Login = ({ newAccount }: { newAccount?: boolean }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<APIError | null>(null);
 
   const auth = useContext(AuthContext);
   return (
@@ -121,7 +121,8 @@ export const Login = ({ newAccount }: { newAccount?: boolean }) => {
           <InfoBanner
             level="error"
             title={newAccount ? "Erro ao criar conta" : "Erro ao entrar"}
-            content={error}
+            content={error.message}
+            details={error.details}
           />
         ) : (
           <></>
