@@ -44,6 +44,10 @@ npm run dev
 
 Abra o navegador na página [http://localhost:5173/](http://localhost:5173/).
 
+## Capturas de tela
+
+Para fins de demonstração, as capturas de tela desse projeto estão na pasta [screenshots](./screenshots), organizadas por dispositivo e tema.
+
 ## (README Original) Teste de aplicação react em TSx com Vite
 
 - Crie um site portfólio com ViteJS, tSX onde tenha páginas estáticas e uma página dinâmica de notícias. Use ContextAPI, react icons e react router dom, axios e boas praticas com CSS ou SCSS
