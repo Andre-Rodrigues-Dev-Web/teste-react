@@ -109,35 +109,31 @@ const NewsPage = () => {
               Nova Notícia
             </div>
             <div className={`collapsible-form ${showNewForm ? "open" : ""}`}>
-              <fieldset>
-                <div className="labeled-input">
-                  <label htmlFor="title-input">Título</label>
-                  <input
-                    id="title-input"
-                    className="title-input"
-                    value={title}
-                    placeholder="Título"
-                    onChange={(e) => {
-                      setTitle(e.target.value);
-                    }}
-                  />
-                </div>
-              </fieldset>
-              <fieldset>
-                <div className="labeled-input">
-                  <label htmlFor="content-input">Conteúdo</label>
-                  <textarea
-                    id="content-input"
-                    className="content-input"
-                    value={content}
-                    placeholder="Texto da notícia"
-                    rows={6}
-                    onChange={(e) => {
-                      setContent(e.target.value);
-                    }}
-                  />
-                </div>
-              </fieldset>
+              <div className="labeled-input">
+                <label htmlFor="title-input">Título</label>
+                <input
+                  id="title-input"
+                  className="title-input"
+                  value={title}
+                  placeholder="Título"
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
+                />
+              </div>
+              <div className="labeled-input">
+                <label htmlFor="content-input">Conteúdo</label>
+                <textarea
+                  id="content-input"
+                  className="content-input"
+                  value={content}
+                  placeholder="Texto da notícia"
+                  rows={6}
+                  onChange={(e) => {
+                    setContent(e.target.value);
+                  }}
+                />
+              </div>
               <button
                 type="submit"
                 onClick={() => {

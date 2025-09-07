@@ -4,15 +4,19 @@
   align-items: center;
   justify-content: center;
   .news-form {
+    width: max(20rem, 100%);
+    display: flex;
+    flex-direction: column;
     .collapse {
       display: flex;
       align-items: center;
       gap: 8px;
       background-color: var(--theme-base);
-      padding: 16px;
       font-size: 1.3rem;
+      padding: 16px;
       font-weight: bold;
       border-radius: 8px 8px 0 0;
+      text-align: center;
       &:hover {
         cursor: pointer;
       }
@@ -20,12 +24,12 @@
         padding: 4px;
         background-color: var(--theme-text);
         color: var(--theme-base);
-        border-radius: 16px;
+        border-radius: 50%;
       }
     }
     .collapsible-form {
       border-radius: 0 0 8px 8px;
-      display: flex;
+      padding: 0px 16px;
       flex-direction: column;
       align-items: flex-start;
       background-color: var(--theme-base);
@@ -33,23 +37,17 @@
       &.open {
         display: flex;
       }
-      fieldset {
-        padding: 0;
-        padding: 16px;
-        display: flex;
-        width: 100%;
-        border: none;
-      }
       .labeled-input {
+        margin: 8px 0;
         display: flex;
+        border: none;
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
         margin-right: 16px;
         label {
-          font-size: 1.1rem;
           font-weight: bold;
-          padding-bottom: 4px;
+          margin-bottom: 4px;
         }
         input,
         textarea {
@@ -60,16 +58,17 @@
           width: 100%;
           padding: 16px;
           border-radius: 8px;
-          box-shadow: 0px 0px 5px 2px inset rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 0px 5px 2px inset rgba(0, 0, 0, 0.1);
         }
       }
       button {
         background-color: var(--theme-blue);
-        color: black;
+        color: var(--theme-crust);
+        width: 100%;
         padding: 16px;
-        align-self: center;
+        margin-top: 8px;
         margin-bottom: 16px;
-        border-radius: 16px;
+        border-radius: 8px;
         font-weight: bold;
         border: none;
       }
