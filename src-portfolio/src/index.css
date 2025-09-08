@@ -14,10 +14,10 @@
   @media (350px < width <= 690px) {
     font-size: 8.5pt;
   }
-  @media (690px < width <=1000px) {
+  @media (690px < width <= 1000px) {
     font-size: 10pt;
   }
-  @media (width > 1001px) {
+  @media (width > 1000px) {
     font-size: 12pt;
   }
 }

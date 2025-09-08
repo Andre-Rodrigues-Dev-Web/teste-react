@@ -17,6 +17,7 @@ import { parseAPIError, truncateText, type APIError } from "../../util";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router";
 import { InfoBanner } from "../../Components/InfoBanner/InfoBanner";
+import { FaNewspaper } from "react-icons/fa6";
 
 dayjs.extend(localizedFormat);
 const NewsPage = () => {
@@ -78,7 +79,9 @@ const NewsPage = () => {
   return (
     <div className="news">
       <main>
-        <h1> Notícias</h1>
+        <h1>
+          <FaNewspaper /> Notícias
+        </h1>
         {auth.userInfo ? (
           <form
             className="news-form"
@@ -86,7 +89,8 @@ const NewsPage = () => {
               e.preventDefault();
             }}
           >
-            <div
+            <button
+              type="button"
               className={`collapse ${!showNewForm ? "closed" : ""}`}
               onClick={() => {
                 setShowNewForm(!showNewForm);
@@ -96,7 +100,7 @@ const NewsPage = () => {
                 {showNewForm ? <FaCaretDown /> : <FaCaretRight />}
               </div>
               Nova Notícia
-            </div>
+            </button>
             <div className={`collapsible-form ${showNewForm ? "open" : ""}`}>
               <div className="labeled-input">
                 <label htmlFor="title-input">Título</label>
@@ -195,13 +199,14 @@ const NewsPage = () => {
                   >
                     <div className="news-info">
                       <div className="news-title-row">
-                        <h2>{news.title}</h2>
+                        <h2>{truncateText(news.title, 150)}</h2>
                         {!auth.userInfo ||
                         news.author.id !== auth.userInfo.id ? (
                           <></>
                         ) : (
                           <div className="action-buttons">
                             <button
+                              aria-label="Editar Notícia"
                               className="action-button"
                               type="button"
                               onClick={(e) => {
@@ -213,6 +218,7 @@ const NewsPage = () => {
                               <FaPenToSquare />
                             </button>
                             <button
+                              aria-label="Deletar Notícia"
                               className="action-button"
                               type="button"
                               onClick={(e) => {
@@ -227,33 +233,18 @@ const NewsPage = () => {
                         )}
                       </div>
                       <div className="news-authorship">
-                        <div className="author">{news.author.name}</div>
-                        <div className="separator">
-                          <FaCircle size={"0.2rem"} />
-                        </div>
                         <div className="created-date">
                           {dayjs
                             .unix(news.createdAt)
                             .locale("pt-br")
-                            .format("LLL")}
-                        </div>
+                            .format("L, HH:mm")}
 
-                        {news.updatedAt ? (
-                          <>
-                            <div className="separator">
-                              <FaCircle size={"0.2rem"} />
-                            </div>
-                            <div className="updated-date">
-                              {"Editado " +
-                                dayjs
-                                  .unix(news.updatedAt)
-                                  .locale("pt-br")
-                                  .format("LLL")}
-                            </div>
-                          </>
-                        ) : (
-                          <></>
-                        )}
+                          {news.updatedAt ? <> (Editado)</> : <></>}
+                        </div>
+                        <div className="separator">
+                          <FaCircle size={"0.2rem"} />
+                        </div>
+                        <div className="author">{news.author.name}</div>
                       </div>
                     </div>
                     <div className="content">

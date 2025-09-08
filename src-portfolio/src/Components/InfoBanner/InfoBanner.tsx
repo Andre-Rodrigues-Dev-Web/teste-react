@@ -45,7 +45,8 @@ export const InfoBanner = (props: PropsWithChildren<InfoBannerProps>) => {
         <></>
       ) : (
         <>
-          <div
+          <button
+            type="button"
             className="collapse-details"
             onClick={() => {
               setShowDetails(!showDetails);
@@ -55,7 +56,7 @@ export const InfoBanner = (props: PropsWithChildren<InfoBannerProps>) => {
               {showDetails ? <FaCaretDown /> : <FaCaretRight />}
             </div>{" "}
             Detalhes
-          </div>
+          </button>
           <div
             className={`collapsible-details ${showDetails ? "open-details" : ""}`}
           >

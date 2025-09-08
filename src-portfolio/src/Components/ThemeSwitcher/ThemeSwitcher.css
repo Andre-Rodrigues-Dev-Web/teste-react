@@ -1,7 +1,7 @@
 .theme-button {
-  height: 30px;
-  width: 30px;
-  border: 1px solid var(--theme-surface2);
+  height: 2.1rem;
+  width: 2.1rem;
+  border: 0.1rem solid var(--theme-surface2);
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s;

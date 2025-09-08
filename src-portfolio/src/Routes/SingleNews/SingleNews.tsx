@@ -9,6 +9,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import "dayjs/locale/pt-br";
 import {
   FaCalendar,
+  FaCircle,
   FaNewspaper,
   FaPenToSquare,
   FaUser,
@@ -55,28 +56,34 @@ export const SingleNews = () => {
       ) : news ? (
         <main>
           <div className="news-container">
+            <span className="news-indicator">
+              <FaNewspaper /> Notícia
+            </span>
             <div className="news-header">
-              <h1 className="news-title">
-                <FaNewspaper /> {news.title}
-              </h1>
+              <h1 className="news-title">{news.title}</h1>
               <div className="info-row">
+                <div className="date-row">
+                  <div className="created-date">
+                    <FaCalendar />
+                    {dayjs.unix(news.createdAt).locale("pt-br").format("LLL")}
+                  </div>
+                  {news.updatedAt ? (
+                    <div className="updated-date">
+                      <FaPenToSquare />
+                      {"Editado " +
+                        dayjs
+                          .unix(news.updatedAt)
+                          .locale("pt-br")
+                          .format("LLL")}
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
                 <div className="author">
                   <FaUser />
                   {news.author.name}
                 </div>
-                <div className="created-date">
-                  <FaCalendar />
-                  {dayjs.unix(news.createdAt).locale("pt-br").format("LLL")}
-                </div>
-                {news.updatedAt ? (
-                  <div className="updated-date">
-                    <FaPenToSquare />
-                    {"Editado " +
-                      dayjs.unix(news.updatedAt).locale("pt-br").format("LLL")}
-                  </div>
-                ) : (
-                  <></>
-                )}
               </div>
             </div>
             <span className="news-content">{news.content}</span>

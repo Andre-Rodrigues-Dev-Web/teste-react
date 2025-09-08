@@ -12,20 +12,19 @@
       .hero {
         box-shadow: 0px 0px 16px 2px rgba(0, 0, 0, 0.2);
         height: 500px;
-        width: clamp(300px, 80%, 900px);
+        width: clamp(19rem, 80%, 57rem);
         background-color: var(--theme-base);
         justify-content: center;
         align-items: center;
         display: flex;
         border-radius: 16px;
-        padding: 16px 32px;
 
-        padding: 16px;
+        padding: 1rem;
         .hero-content {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 32px;
+          gap: 2rem;
           flex-wrap: wrap-reverse;
           .info-column {
             display: flex;
@@ -44,7 +43,7 @@
             .photo {
               background-color: var(--theme-surface1);
               box-shadow: 0px 0px 16px 2px rgba(0, 0, 0, 0.2);
-              width: clamp(150px, 20vw, 200px);
+              width: clamp(13rem, 20vw, 14rem);
               aspect-ratio: 1/1;
               object-fit: cover;
               border-radius: 2rem;
@@ -58,7 +57,7 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      padding: 8px 16px;
+      padding: 0.5rem 2rem;
       background-color: var(--theme-base);
       margin-bottom: 50px;
       border-radius: 1.5rem;
@@ -77,7 +76,7 @@
       border-radius: 16px;
       margin-bottom: 50px;
       .about {
-        padding: 32px;
+        padding: 2rem;
         width: max(100%, 70vw);
         display: flex;
         flex-direction: column;
@@ -94,16 +93,16 @@
               display: flex;
               align-items: center;
               justify-content: flex-start;
-              gap: 16px;
+              gap: 1rem;
             }
             .info-item {
-              padding: 16px;
+              padding: 1rem;
               background-color: var(--theme-surface0);
               border-radius: 8px;
               display: flex;
               align-items: center;
               justify-content: flex-start;
-              gap: 16px;
+              gap: 1rem;
               .info-content {
                 display: flex;
                 flex-direction: column;
@@ -138,7 +137,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 32px;
+      padding: 2rem;
 
       margin-bottom: 50px;
 
@@ -147,7 +146,7 @@
         display: flex;
         align-items: center;
         align-self: flex-start;
-        gap: 16px;
+        gap: 1rem;
       }
       .tech-columns {
         width: 100%;
@@ -155,7 +154,7 @@
         align-items: center;
         flex-direction: column;
         justify-content: center;
-        gap: 32px;
+        gap: 2rem;
         .tech-description {
           font-size: 1.5rem;
           display: flex;
@@ -164,49 +163,48 @@
           text-align: center;
           justify-items: center;
           justify-content: center;
-          gap: 16px;
+          gap: 1rem;
         }
         .tech-stack-list {
           width: 100%;
           display: flex;
           flex-direction: column;
-          gap: 8px;
+          gap: 0.5rem;
           .tech-stack-section {
-            padding: 8px;
+            padding: 0.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             h3 {
               display: flex;
-              gap: 8px;
+              gap: 0.5rem;
               align-items: center;
               justify-content: center;
               background-color: var(--theme-surface0);
-              padding: 8px 32px;
+              padding: 0.5rem 2rem;
               border-radius: 16px;
               margin-bottom: 16px;
               text-align: center;
             }
             ul {
               display: grid;
-              width: 100%;
-              justify-content: space-between;
+              width: 90%;
+              justify-content: space-around;
               align-items: center;
-              padding: 8px;
+              padding: 0.5rem;
 
               @media (width <= 340px) {
-                grid-template-columns: 80%;
-                justify-content: space-evenly;
+                grid-template-columns: 1fr;
               }
               @media (341px < width <=1000px) {
-                grid-template-columns: 40% 40%;
+                grid-template-columns: 1fr 1fr;
               }
 
               @media (690px < width <=1000px) {
-                grid-template-columns: 30% 30% 30%;
+                grid-template-columns: 1fr 1fr 1fr;
               }
               @media (width > 1001px) {
-                grid-template-columns: 20% 20% 20% 20%;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
               }
 
               li {
@@ -217,14 +215,13 @@
                   justify-content: center;
                   flex-direction: column;
                   text-align: center;
-                  margin: 8px;
+                  margin: 0.5rem;
                   .icon {
-                    min-width: max(3rem, 40px);
-                    width: 90px;
+                    width: clamp(60px, 5rem, 80px);
                     aspect-ratio: 1/1;
                   }
                   .name {
-                    font-size: 1.2rem;
+                    font-size: 1.3rem;
                   }
                 }
               }
@@ -238,10 +235,10 @@
       align-items: center;
       justify-content: center;
       width: 80%;
-      padding: 32px;
+      padding: 2rem;
       ul {
         display: flex;
-        gap: 16px;
+        gap: 1rem;
         justify-content: center;
         flex-wrap: wrap;
         li {
@@ -264,7 +261,7 @@
               flex-direction: column;
               align-items: start;
               justify-content: flex-start;
-              padding: 16px;
+              padding: 1.5rem;
               .project-title {
                 font-weight: bold;
                 color: var(--theme-text);
@@ -284,7 +281,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 32px;
+      padding: 2rem;
       margin-bottom: 50px;
       width: 80%;
       span {
@@ -294,12 +291,12 @@
       .contact-info {
         display: flex;
         flex-wrap: wrap;
-        gap: 16px;
+        gap: 1rem;
         a {
           font-size: 1.2rem;
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: 0.3rem;
           text-decoration: none;
         }
       }

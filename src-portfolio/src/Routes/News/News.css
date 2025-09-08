@@ -10,13 +10,15 @@
     .collapse {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 0.5rem;
       background-color: var(--theme-base);
       font-size: 1.3rem;
-      padding: 16px;
+      padding: 1rem;
       font-weight: bold;
       border-radius: 8px 8px 0 0;
       text-align: center;
+      border: none;
+      color: inherit;
       &.closed {
         border-radius: 8px;
         margin-bottom: 1rem;
@@ -25,7 +27,7 @@
         cursor: pointer;
       }
       .collapse-indicator {
-        padding: 4px;
+        padding: 0.2rem;
         background-color: var(--theme-text);
         color: var(--theme-base);
         border-radius: 50%;
@@ -33,7 +35,7 @@
     }
     .collapsible-form {
       border-radius: 0 0 8px 8px;
-      padding: 0px 16px;
+      padding: 0px 1rem;
       flex-direction: column;
       align-items: flex-start;
       background-color: var(--theme-base);
@@ -43,16 +45,16 @@
         display: flex;
       }
       .labeled-input {
-        margin: 8px 0;
+        margin: 0.5rem 0;
         display: flex;
         border: none;
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
-        margin-right: 16px;
+        margin-right: 1rem;
         label {
           font-weight: bold;
-          margin-bottom: 4px;
+          margin-bottom: 0.5rem;
         }
         input,
         textarea {
@@ -61,7 +63,7 @@
           resize: none;
           border: none;
           width: 100%;
-          padding: 16px;
+          padding: 1rem;
           border-radius: 8px;
           box-shadow: 0px 0px 5px 2px inset rgba(0, 0, 0, 0.1);
         }
@@ -70,9 +72,9 @@
         background-color: var(--theme-blue);
         color: var(--theme-crust);
         width: 100%;
-        padding: 16px;
-        margin-top: 8px;
-        margin-bottom: 16px;
+        padding: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
         border-radius: 8px;
         font-weight: bold;
         border: none;
@@ -84,8 +86,11 @@
     width: 90%;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 1rem;
     h1 {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       font-size: 2.5rem;
       font-weight: bold;
     }
@@ -93,59 +98,65 @@
       h2 {
         font-size: 2rem;
         font-weight: bold;
-        margin-bottom: 16px;
+        margin-bottom: 1rem;
       }
     }
     .news-container {
       display: grid;
       justify-content: center;
-      gap: 16px;
-      @media (max-width: 700px) {
-        grid-template-columns: 90%;
+      gap: 1rem;
+      @media (width <= 800px) {
+        grid-template-columns: 1fr;
       }
-      @media (min-width: 701px) and (max-width: 1100px) {
-        grid-template-columns: 45% 45%;
+      @media (800px < width <=1200px) {
+        grid-template-columns: 1fr 1fr;
       }
-      @media (min-width: 1101px) {
-        grid-template-columns: 30% 30% 30%;
+      @media (width > 1200px) {
+        grid-template-columns: 1fr 1fr 1fr;
       }
       .news-item {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 0.5rem;
         text-decoration: none;
         color: var(--theme-text);
         background-color: var(--theme-base);
-        padding: 16px;
+        padding: 1rem;
         border-radius: 8px;
+        word-break: break-word;
+        white-space: pre-wrap;
+
         .news-info {
           .news-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+
             h2 {
+              flex: 4;
               font-size: 1.3rem;
             }
             .action-buttons {
+              flex: 1;
               display: flex;
               align-items: center;
-              justify-content: center;
-              gap: 4px;
+              justify-content: end;
+              gap: 0.4rem;
               .action-button {
                 border: none;
                 background-color: var(--theme-surface1);
                 color: var(--theme-text);
-                padding: 8px;
+                padding: 0.5rem;
                 border-radius: 4px;
                 &:hover {
                   cursor: pointer;
                 }
               }
             }
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
           }
           .news-authorship {
             display: flex;
-            gap: 4px;
+            gap: 0.3rem;
             align-items: center;
             flex-wrap: wrap;
             color: var(--theme-subtext0);

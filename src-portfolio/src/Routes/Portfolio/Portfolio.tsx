@@ -179,7 +179,7 @@ export const Portfolio = () => {
         <div id="contact" className="contact">
           <span>Entre em contato comigo via e-mail ou LinkedIn!</span>
           <div className="contact-info">
-            <a>
+            <a href="mailto:gabrielvaleriano18@outlook.com">
               <FaEnvelope color="var(--theme-yellow)" />
               gabrielvaleriano18@outlook.com
             </a>
