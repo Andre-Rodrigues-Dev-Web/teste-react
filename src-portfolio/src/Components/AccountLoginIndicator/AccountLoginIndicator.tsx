@@ -46,6 +46,7 @@ export const AccountLoginIndicator = () => {
             setHovering(false);
           }}
           className="account-login-indicator logged-in"
+          aria-label="Sair"
         >
           {hovering ? (
             <>

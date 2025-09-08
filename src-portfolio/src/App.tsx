@@ -57,14 +57,16 @@ export const App = () => {
       <ThemeContext value={theme}>
         <div className="app">
           <header>
-            <ul className="navigation">
-              <li>
-                <Link to="/">Portfólio</Link>
-              </li>
-              <li>
-                <Link to="/news">Notícias</Link>
-              </li>
-            </ul>
+            <nav>
+              <ul className="navigation">
+                <li>
+                  <Link to="/">Portfólio</Link>
+                </li>
+                <li>
+                  <Link to="/news">Notícias</Link>
+                </li>
+              </ul>
+            </nav>
             <div className="header-right">
               <div className="themes">
                 <div className="theme-options">

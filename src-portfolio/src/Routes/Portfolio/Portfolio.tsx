@@ -37,7 +37,7 @@ const InfoItem = (props: InfoItemProps) => (
   </>
 );
 export const Portfolio = () => {
-  const scrollToAbout = (id: string) => {
+  const scrollToElement = (id: string) => {
     const aboutContainer = document.getElementById(id);
     if (aboutContainer) aboutContainer.scrollIntoView({ behavior: "smooth" });
   };
@@ -52,7 +52,11 @@ export const Portfolio = () => {
                 <span className="description"> Desenvolvedor de software</span>
               </div>
               <div className="photo-container">
-                <img src="/photo.jpg" className="photo" />
+                <img
+                  src="/photo.jpg"
+                  className="photo"
+                  alt="Foto de Gabriel Valeriano Gomes"
+                />
               </div>
             </div>
           </div>
@@ -60,7 +64,7 @@ export const Portfolio = () => {
         <div
           className="section-title"
           onClick={() => {
-            scrollToAbout("about-container");
+            scrollToElement("about-container");
           }}
         >
           <FaArrowDown />
@@ -134,7 +138,7 @@ export const Portfolio = () => {
         <div
           className="section-title"
           onClick={() => {
-            scrollToAbout("projects-container");
+            scrollToElement("projects-container");
           }}
         >
           <FaCode />
@@ -148,15 +152,17 @@ export const Portfolio = () => {
                 description="Legal né?"
                 link="#"
                 imageSrc="/portfolio.png"
+                altText="Captura de tela da área inicial desse mesmo portfólio"
               />
             </li>
             <li className="project-container">
               <Project
-                title="Shhh"
+                title="Shhhh"
                 imageSrc="/shhhhScreenshot.png"
                 description={`"Rede social" offline que permite a criação de "postagens"
                   salvas localmente`}
                 link="https://github.com/Lummidev/shhhh"
+                altText={`Captura de tela do projeto "Shhhh", na tela inicial da aplicação onde é mostrada a linha do tempo do usuário`}
               />
             </li>
           </ul>
@@ -164,7 +170,7 @@ export const Portfolio = () => {
         <div
           className="section-title"
           onClick={() => {
-            scrollToAbout("contact");
+            scrollToElement("contact");
           }}
         >
           <FaAddressCard />

@@ -13,6 +13,7 @@ export const TechStackItem = (props: TechStackItemProps) => {
       <img
         className="icon"
         src={`/${props.icon}${props.adaptive ? `-${theme}` : ""}.svg`}
+        alt={`Logo ${props.name}`}
       />
       <div className="name">{props.name}</div>
     </div>

@@ -10,15 +10,18 @@
     font-size: 1.2rem;
     padding: 0 5%;
     width: 100%;
-    .navigation {
+    nav {
       display: flex;
-      width: 40%;
-      justify-content: space-evenly;
-      gap: 1rem;
-
-      li {
-        a {
-          text-decoration: none;
+      width: clamp(12rem, 20%, 16rem);
+      .navigation {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        li {
+          a {
+            text-decoration: none;
+          }
         }
       }
     }

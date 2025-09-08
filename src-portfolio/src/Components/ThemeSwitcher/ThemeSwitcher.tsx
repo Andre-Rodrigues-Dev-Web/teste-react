@@ -21,6 +21,7 @@ export const ThemeSwitcher = ({
         setTheme();
         onClick(themeName);
       }}
+      aria-label={`Mudar para o tema ${themeName}`}
     >
       <Icon />
     </button>
