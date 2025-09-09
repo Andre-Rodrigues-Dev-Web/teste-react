@@ -29,7 +29,7 @@ const frontEndList: TechStackList = {
       svg: "javascript",
     },
     {
-      name: "Typecript",
+      name: "Typescript",
       svg: "typescript",
     },
     {
