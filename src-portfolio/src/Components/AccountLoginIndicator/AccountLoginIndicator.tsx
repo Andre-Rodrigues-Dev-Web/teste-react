@@ -17,9 +17,6 @@ export const AccountLoginIndicator = () => {
       .addEventListener("change", (e) => setHideText(e.matches));
   }, []);
 
-  useEffect(() => {
-    console.log(hideText);
-  }, [hideText]);
   return (
     <>
       {auth.userInfo ? (

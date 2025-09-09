@@ -9,7 +9,6 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import "dayjs/locale/pt-br";
 import {
   FaCalendar,
-  FaCircle,
   FaNewspaper,
   FaPenToSquare,
   FaUser,
