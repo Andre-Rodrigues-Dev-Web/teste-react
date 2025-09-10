@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router";
+import { Outlet } from "react-router";
 import "./App.css";
 import { ThemeSwitcher } from "./Components/ThemeSwitcher/ThemeSwitcher";
 import { FaMoon, FaSun } from "react-icons/fa6";
@@ -9,28 +9,13 @@ import type { UserInfo } from "./Entities/UserInfo";
 import { AuthContext } from "./Context/AuthContext";
 import { login } from "./API/loginApi";
 import { useNavigate } from "react-router";
+import { UnderlineLink } from "./Components/UnderlineLink/UnderlineLink";
 
 export const App = () => {
   const [theme, setTheme] = useState("dark");
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const navigate = useNavigate();
-  const onLogin = async (username: string, password: string) => {
-    const userInfo = await login(username, password);
-    setUserInfo(userInfo);
-    localStorage.setItem("userInfo", JSON.stringify(userInfo));
-    await navigate("/");
-  };
-  const onAccountCreation = (userInfo: UserInfo) => {
-    setUserInfo(userInfo);
 
-    localStorage.setItem("userInfo", JSON.stringify(userInfo));
-    navigate("/");
-  };
-  const onLogout = async () => {
-    setUserInfo(null);
-    localStorage.removeItem("userInfo");
-  };
-  const onAuthFail = async () => {};
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
@@ -47,11 +32,29 @@ export const App = () => {
     setTheme(theme);
   };
   const authContext = useMemo(() => {
+    const onLogin = async (username: string, password: string) => {
+      const userInfo = await login(username, password);
+      setUserInfo(userInfo);
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      await navigate("/");
+    };
+    const onAccountCreation = (userInfo: UserInfo) => {
+      setUserInfo(userInfo);
+
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      navigate("/");
+    };
+    const onLogout = async () => {
+      setUserInfo(null);
+      localStorage.removeItem("userInfo");
+    };
+    const onAuthFail = async () => {};
+
     return {
       userInfo,
       events: { onAuthFail, onLogin, onLogout, onAccountCreation },
     };
-  }, [userInfo, onLogin]);
+  }, [userInfo, navigate]);
   return (
     <AuthContext value={authContext}>
       <ThemeContext value={theme}>
@@ -60,10 +63,14 @@ export const App = () => {
             <nav>
               <ul className="navigation">
                 <li>
-                  <Link to="/">Portfólio</Link>
+                  <UnderlineLink route to="/">
+                    Portfólio
+                  </UnderlineLink>
                 </li>
                 <li>
-                  <Link to="/news">Notícias</Link>
+                  <UnderlineLink route to="/news">
+                    Notícias
+                  </UnderlineLink>
                 </li>
               </ul>
             </nav>

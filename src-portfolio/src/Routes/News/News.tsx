@@ -18,6 +18,8 @@ import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router";
 import { InfoBanner } from "../../Components/InfoBanner/InfoBanner";
 import { FaNewspaper } from "react-icons/fa6";
+import { Button } from "../../Components/Button/Button";
+import { LabeledInput } from "../../Components/LabeledInput/LabeledInput";
 
 dayjs.extend(localizedFormat);
 const NewsPage = () => {
@@ -102,41 +104,38 @@ const NewsPage = () => {
               Nova Notícia
             </button>
             <div className={`collapsible-form ${showNewForm ? "open" : ""}`}>
-              <div className="labeled-input">
-                <label htmlFor="title-input">Título</label>
-                <input
-                  id="title-input"
-                  className="title-input"
-                  value={title}
-                  placeholder="Título"
-                  onChange={(e) => {
-                    setTitle(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="labeled-input">
-                <label htmlFor="content-input">Conteúdo</label>
-                <textarea
-                  id="content-input"
-                  className="content-input"
-                  value={content}
-                  placeholder="Texto da notícia"
-                  rows={6}
-                  onChange={(e) => {
-                    setContent(e.target.value);
-                  }}
-                />
-              </div>
-              <button
+              <LabeledInput
+                title="Título"
+                id="title-input"
+                value={title}
+                placeholder="Título"
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              />
+              <LabeledInput
+                title="Conteúdo"
+                id="content-input"
+                value={content}
+                placeholder="Texto da notícia"
+                onChange={(e) => {
+                  setContent(e.target.value);
+                }}
+                rows={6}
+                textarea
+              />
+
+              <Button
                 type="submit"
                 onClick={() => {
                   onSave().catch((e) => {
                     console.error(e);
                   });
                 }}
+                color="primary"
               >
                 Salvar
-              </button>
+              </Button>
             </div>
 
             {saving ? (

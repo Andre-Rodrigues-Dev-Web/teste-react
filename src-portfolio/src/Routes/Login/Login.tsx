@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
 import "./Login.css";
 import { AuthContext } from "../../Context/AuthContext";
-import { Link } from "react-router";
 import { addUser } from "../../API/usersApi";
 import { parseAPIError, type APIError } from "../../util";
 import { InfoBanner } from "../../Components/InfoBanner/InfoBanner";
+import { Button } from "../../Components/Button/Button";
+import { LabeledInput } from "../../Components/LabeledInput/LabeledInput";
 export const Login = ({ newAccount }: { newAccount?: boolean }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -39,79 +40,52 @@ export const Login = ({ newAccount }: { newAccount?: boolean }) => {
       >
         <h1>{newAccount ? "Criar Conta" : "Login"}</h1>
         {newAccount ? (
-          <div className="labeled-input">
-            <label htmlFor="name-input">Nome</label>
-            <input
-              id="name-input"
-              type="text"
-              value={name}
-              placeholder="Nome"
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-          </div>
+          <LabeledInput
+            title="Nome"
+            id="name-input"
+            value={name}
+            placeholder="Nome"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
         ) : (
           <></>
         )}
-        <div className="labeled-input">
-          <label htmlFor="username-input">Usuário</label>
-          <input
-            id="username-input"
-            type="text"
-            value={username}
-            placeholder="Usuário"
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
-        </div>
-        <div className="labeled-input">
-          <label htmlFor="password-input">Senha</label>
-          <input
-            id="password-input"
-            type="password"
-            value={password}
-            placeholder="Senha"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-        </div>
+        <LabeledInput
+          title="Usuário"
+          id="username-input"
+          value={username}
+          placeholder="Usuário"
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+        />
+        <LabeledInput
+          title="Senha"
+          id="password-input"
+          type="password"
+          value={password}
+          placeholder="Senha"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
         <div className="login-button-row">
-          {newAccount ? (
-            <>
-              <button className="login" type="submit">
-                Criar conta
-              </button>
-              <Link
-                to="/login"
-                onClick={() => {
-                  setError(null);
-                }}
-                className="create"
-                type="button"
-              >
-                Cancelar
-              </Link>
-            </>
-          ) : (
-            <>
-              <button className="login" type="submit">
-                Entrar
-              </button>
-              <Link
-                to="/newAccount"
-                onClick={() => {
-                  setError(null);
-                }}
-                className="create"
-                type="button"
-              >
-                Criar conta
-              </Link>
-            </>
-          )}
+          <Button type="submit" color="primary">
+            {newAccount ? "Criar conta" : "Entrar"}
+          </Button>
+
+          <Button
+            type="link"
+            color="secondary"
+            to={newAccount ? "/login" : "/newAccount"}
+            onClick={() => {
+              setError(null);
+            }}
+          >
+            {newAccount ? "Cancelar" : "Criar Conta"}
+          </Button>
         </div>
       </form>
       <div className="status">

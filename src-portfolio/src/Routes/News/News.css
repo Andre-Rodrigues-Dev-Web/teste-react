@@ -46,39 +46,12 @@
       }
       .labeled-input {
         margin: 0.5rem 0;
-        display: flex;
-        border: none;
-        flex-direction: column;
-        align-items: flex-start;
         width: 100%;
-        margin-right: 1rem;
-        label {
-          font-weight: bold;
-          margin-bottom: 0.5rem;
-        }
-        input,
-        textarea {
-          color: var(--theme-text);
-          background-color: var(--theme-mantle);
-          resize: none;
-          border: none;
-          width: 100%;
-          padding: 1rem;
-          border-radius: 8px;
-          box-shadow: 0px 0px 5px 2px inset rgba(0, 0, 0, 0.1);
-        }
       }
-      button {
-        background-color: var(--theme-blue);
-        color: var(--theme-crust);
+      .button {
         width: 100%;
-        padding: 1rem;
         margin-top: 1rem;
         margin-bottom: 1rem;
-        border-radius: 8px;
-        font-weight: bold;
-        border: none;
-        cursor: pointer;
       }
     }
   }
@@ -95,6 +68,8 @@
       font-weight: bold;
     }
     .published-news {
+      margin-bottom: 1rem;
+
       h2 {
         font-size: 2rem;
         font-weight: bold;

@@ -1,0 +1,28 @@
+.button {
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  border: none;
+  color: var(--theme-crust);
+
+  &:hover {
+    cursor: pointer;
+  }
+  &.button-primary {
+    background-color: var(--theme-blue);
+    &:hover {
+      background-color: color-mix(in srgb, var(--theme-blue) 85%, black 15%);
+    }
+  }
+  &.button-secondary {
+    color: var(--theme-text);
+    background-color: var(--theme-surface0);
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--theme-surface0) 90%,
+        var(--theme-text) 10%
+      );
+    }
+  }
+}

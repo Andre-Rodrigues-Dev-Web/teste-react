@@ -5,6 +5,8 @@ import { getNews, updateNews } from "../../API/newsApi";
 import { AuthContext } from "../../Context/AuthContext";
 import { parseAPIError, type APIError } from "../../util";
 import { InfoBanner } from "../../Components/InfoBanner/InfoBanner";
+import { LabeledInput } from "../../Components/LabeledInput/LabeledInput";
+import { Button } from "../../Components/Button/Button";
 export const EditNews = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -68,41 +70,36 @@ export const EditNews = () => {
             }}
           >
             <h1> Editar Notícia</h1>
-            <div className="labeled-input">
-              <label htmlFor="text-input">Título</label>
-              <input
-                id="text-input"
-                type="text"
-                value={title}
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-              />
-            </div>
-            <div className="labeled-input">
-              <label>Conteúdo</label>
-              <textarea
-                id="content-input"
-                value={content}
-                rows={6}
-                onChange={(e) => {
-                  setContent(e.target.value);
-                }}
-              />
-            </div>
+            <LabeledInput
+              title="Título"
+              placeholder="Título"
+              id="title-input"
+              type="text"
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
+            <LabeledInput
+              title="Conteúdo"
+              placeholder="Conteúdo"
+              id="content-input"
+              rows={6}
+              value={content}
+              onChange={(e) => {
+                setContent(e.target.value);
+              }}
+              textarea
+            />
+
             <div className="form-button-row">
-              <button type="submit" className="primary">
+              <Button type="submit" color="primary">
                 Salvar
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  navigate("/news");
-                }}
-                className="secondary"
-              >
+              </Button>
+
+              <Button type="link" to="/news" color="secondary">
                 Cancelar
-              </button>
+              </Button>
             </div>
           </form>
           <div className="status">

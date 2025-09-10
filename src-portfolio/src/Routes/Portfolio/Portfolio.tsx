@@ -13,6 +13,7 @@ import { FaLinkedin, FaWrench } from "react-icons/fa";
 import { techStackList } from "./techStackList";
 import { TechStackItem } from "../../Components/TechStackItem";
 import { Project } from "../../Components/Project";
+import { UnderlineLink } from "../../Components/UnderlineLink/UnderlineLink";
 interface InfoItemProps {
   title: string;
   place: string;
@@ -179,13 +180,14 @@ export const Portfolio = () => {
         <div id="contact" className="contact">
           <span>Entre em contato comigo via e-mail ou LinkedIn!</span>
           <div className="contact-info">
-            <a href="mailto:gabrielvaleriano18@outlook.com">
+            <UnderlineLink href="mailto:gabrielvaleriano18@outlook.com">
               <FaEnvelope color="var(--theme-yellow)" />
               gabrielvaleriano18@outlook.com
-            </a>
-            <a href="https://www.linkedin.com/in/gabriel-valeriano-gomes-43a21a209/">
+            </UnderlineLink>
+
+            <UnderlineLink href="https://www.linkedin.com/in/gabriel-valeriano-gomes-43a21a209/">
               <FaLinkedin color="var(--theme-blue)" /> LinkedIn
-            </a>
+            </UnderlineLink>
           </div>
         </div>
       </main>
