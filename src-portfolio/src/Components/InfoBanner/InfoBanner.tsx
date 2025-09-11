@@ -1,10 +1,10 @@
 import { useState, type PropsWithChildren } from "react";
 import "./InfoBanner.css";
 import {
-  FaCaretDown,
-  FaCaretRight,
   FaCircleInfo,
   FaCircleXmark,
+  FaSquareCaretDown,
+  FaSquareCaretRight,
   FaTriangleExclamation,
 } from "react-icons/fa6";
 interface InfoBannerProps {
@@ -53,7 +53,7 @@ export const InfoBanner = (props: PropsWithChildren<InfoBannerProps>) => {
             }}
           >
             <div className="collapse-details-icon">
-              {showDetails ? <FaCaretDown /> : <FaCaretRight />}
+              {showDetails ? <FaSquareCaretDown /> : <FaSquareCaretRight />}
             </div>{" "}
             Detalhes
           </button>

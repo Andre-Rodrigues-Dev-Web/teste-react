@@ -9,7 +9,7 @@
     font-weight: bolder;
     display: flex;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     gap: 0.5rem;
   }
   .info-content {
@@ -20,44 +20,21 @@
   &.note {
     background-color: var(--theme-base);
     color: var(--theme-text);
-    .collapse-details {
-      .collapse-details-icon {
-        color: var(--theme-base);
-        background-color: var(--theme-text);
-      }
-    }
   }
   &.information {
     background-color: var(--theme-blue);
     color: var(--theme-mantle);
-    .collapse-details {
-      .collapse-details-icon {
-        color: var(--theme-blue);
-        background-color: var(--theme-crust);
-      }
-    }
   }
   &.warning {
     background-color: var(--theme-yellow);
     color: var(--theme-mantle);
-    .collapse-details {
-      .collapse-details-icon {
-        color: var(--theme-yellow);
-        background-color: var(--theme-crust);
-      }
-    }
   }
   &.error {
     background-color: var(--theme-red);
     color: var(--theme-mantle);
-    .collapse-details {
-      .collapse-details-icon {
-        color: var(--theme-red);
-        background-color: var(--theme-crust);
-      }
-    }
   }
   .collapse-details {
+    padding: 0;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -70,11 +47,7 @@
       cursor: pointer;
     }
     .collapse-details-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.15rem;
-      border-radius: 50%;
+      font-size: 1.15rem;
     }
   }
   .collapsible-details {

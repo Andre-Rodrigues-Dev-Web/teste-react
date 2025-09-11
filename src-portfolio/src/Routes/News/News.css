@@ -27,10 +27,7 @@
         cursor: pointer;
       }
       .collapse-indicator {
-        padding: 0.2rem;
-        background-color: var(--theme-text);
-        color: var(--theme-base);
-        border-radius: 50%;
+        font-size: 1.4rem;
       }
     }
     .collapsible-form {

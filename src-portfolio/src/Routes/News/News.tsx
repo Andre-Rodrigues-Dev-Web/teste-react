@@ -5,11 +5,14 @@ import { parseAPIError, type APIError } from "../../util";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router";
 import { InfoBanner } from "../../Components/InfoBanner/InfoBanner";
-import { FaNewspaper } from "react-icons/fa6";
+import {
+  FaNewspaper,
+  FaSquareCaretDown,
+  FaSquareCaretRight,
+} from "react-icons/fa6";
 import { Button } from "../../Components/Button/Button";
 import { LabeledInput } from "../../Components/LabeledInput/LabeledInput";
 import { NewsItem } from "../../Components/NewsItem/NewsItem";
-import { FaCaretDown, FaCaretRight } from "react-icons/fa6";
 import "./News.css";
 const NewsPage = () => {
   const [news, setNews] = useState<News[]>([]);
@@ -88,7 +91,7 @@ const NewsPage = () => {
               }}
             >
               <div className="collapse-indicator">
-                {showNewForm ? <FaCaretDown /> : <FaCaretRight />}
+                {showNewForm ? <FaSquareCaretDown /> : <FaSquareCaretRight />}
               </div>
               Nova Notícia
             </button>
