@@ -3,6 +3,7 @@
   width: 2.1rem;
   border: 0.1rem solid var(--theme-surface2);
   border-radius: 50%;
+  padding: 0;
   cursor: pointer;
   transition: all 0.2s;
   background-color: inherit;
