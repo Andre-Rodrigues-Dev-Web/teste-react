@@ -1,27 +1,16 @@
-import {
-  FaCaretDown,
-  FaCaretRight,
-  FaCircle,
-  FaPenToSquare,
-  FaTrash,
-} from "react-icons/fa6";
-import "./News.css";
-import dayjs from "dayjs";
-import localizedFormat from "dayjs/plugin/localizedFormat";
-import "dayjs/locale/pt-br";
 import { useContext, useEffect, useState } from "react";
 import { addNews, deleteNews, getAllNews } from "../../API/newsApi";
 import type { News } from "../../Entities/News";
-import { Link } from "react-router";
-import { parseAPIError, truncateText, type APIError } from "../../util";
+import { parseAPIError, type APIError } from "../../util";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router";
 import { InfoBanner } from "../../Components/InfoBanner/InfoBanner";
 import { FaNewspaper } from "react-icons/fa6";
 import { Button } from "../../Components/Button/Button";
 import { LabeledInput } from "../../Components/LabeledInput/LabeledInput";
-
-dayjs.extend(localizedFormat);
+import { NewsItem } from "../../Components/NewsItem/NewsItem";
+import { FaCaretDown, FaCaretRight } from "react-icons/fa6";
+import "./News.css";
 const NewsPage = () => {
   const [news, setNews] = useState<News[]>([]);
   const [title, setTitle] = useState("");
@@ -191,65 +180,19 @@ const NewsPage = () => {
             <>
               <div className="news-container">
                 {news.map((news) => (
-                  <Link
-                    to={`/news/${news.id}`}
-                    className="news-item"
+                  <NewsItem
                     key={news.id}
-                  >
-                    <div className="news-info">
-                      <div className="news-title-row">
-                        <h2>{truncateText(news.title, 150)}</h2>
-                        {!auth.userInfo ||
-                        news.author.id !== auth.userInfo.id ? (
-                          <></>
-                        ) : (
-                          <div className="action-buttons">
-                            <button
-                              aria-label="Editar Notícia"
-                              className="action-button"
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                navigate(`/news/${news.id}/edit`);
-                              }}
-                            >
-                              <FaPenToSquare />
-                            </button>
-                            <button
-                              aria-label="Deletar Notícia"
-                              className="action-button"
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                onDelete(news.id);
-                              }}
-                            >
-                              <FaTrash />
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                      <div className="news-authorship">
-                        <div className="created-date">
-                          {dayjs
-                            .unix(news.createdAt)
-                            .locale("pt-br")
-                            .format("L, HH:mm")}
-
-                          {news.updatedAt ? <> (Editado)</> : <></>}
-                        </div>
-                        <div className="separator">
-                          <FaCircle size={"0.2rem"} />
-                        </div>
-                        <div className="author">{news.author.name}</div>
-                      </div>
-                    </div>
-                    <div className="content">
-                      {truncateText(news.content, 200)}
-                    </div>
-                  </Link>
+                    news={news}
+                    showActions={
+                      !!auth.userInfo && news.author.id === auth.userInfo.id
+                    }
+                    onDelete={(id) => {
+                      onDelete(id);
+                    }}
+                    onEdit={(id) => {
+                      navigate(`/news/${id}/edit`);
+                    }}
+                  />
                 ))}
               </div>
             </>
