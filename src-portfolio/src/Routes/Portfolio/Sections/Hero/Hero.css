@@ -1,0 +1,45 @@
+.hero {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 4rem;
+  width: 100%;
+}
+.hero__surface {
+  width: clamp(30rem, 100%, 57rem);
+  height: 500px;
+}
+.hero__body {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap-reverse;
+}
+.hero__text {
+  display: flex;
+  flex-direction: column;
+}
+.hero__name {
+  font-size: 3rem;
+  text-align: center;
+}
+.hero__description {
+  font-size: 2rem;
+  color: var(--theme-subtext0);
+  text-align: center;
+}
+.hero__img {
+  background-color: var(--theme-surface1);
+  box-shadow: 0px 0px 16px 2px rgba(0, 0, 0, 0.2);
+  width: clamp(14rem, 25vw, 15rem);
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 2rem;
+}

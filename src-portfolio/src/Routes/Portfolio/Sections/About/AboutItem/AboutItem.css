@@ -1,0 +1,23 @@
+.about__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.about__item-title {
+  font-size: 1.5rem;
+}
+.about__item-information {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+.about__item-place,
+.about__item-separator,
+.about__item-location,
+.about__item-date {
+  color: var(--theme-subtext1);
+}
+.about__item-separator {
+  font-size: 0.25rem;
+}

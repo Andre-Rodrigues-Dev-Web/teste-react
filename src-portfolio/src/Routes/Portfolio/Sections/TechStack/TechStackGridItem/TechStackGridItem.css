@@ -1,0 +1,15 @@
+.tech-stack__grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 0.5rem;
+}
+.tech-stack__grid-item-icon {
+  width: clamp(60px, 5rem, 80px);
+  aspect-ratio: 1/1;
+}
+.tech-stack__grid-item-name {
+  font-size: 1.3rem;
+}

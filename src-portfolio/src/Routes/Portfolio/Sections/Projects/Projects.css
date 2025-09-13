@@ -1,0 +1,15 @@
+.projects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.projects__list {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.projects__list-item {
+  width: 300px;
+}

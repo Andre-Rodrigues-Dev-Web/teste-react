@@ -1,0 +1,25 @@
+.projects__project {
+  text-decoration: none;
+}
+.projects__project-image {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  aspect-ratio: 16/9;
+  background-color: var(--theme-surface1);
+  border: none;
+  object-fit: cover;
+}
+.projects__project-content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: flex-start;
+  padding: 1.5rem;
+}
+.projects__project-title {
+  font-weight: bold;
+  color: var(--theme-text);
+}
+.projects__project-description {
+  color: var(--theme-subtext0);
+}
