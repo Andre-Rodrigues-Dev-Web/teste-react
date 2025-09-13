@@ -15,7 +15,7 @@ export const ThemeSwitcher = ({
   };
   return (
     <button
-      className={`theme-button theme-${themeName}`}
+      className={`theme-button theme-button--${themeName}`}
       type="button"
       onClick={() => {
         setTheme();

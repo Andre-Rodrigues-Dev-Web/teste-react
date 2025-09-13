@@ -30,48 +30,46 @@ export const AccountLoginIndicator = () => {
     : "";
 
   return (
-    <>
+    <div className="account-login-indicator">
       {auth.userInfo ? (
         <>
-          <div className="account-login-indicator">
-            <button
-              onClick={() => {
-                setShowMenu(!showMenu);
-              }}
-              type="button"
-              className={`account-button ${showMenu ? "open" : ""}`}
-            >
-              <FaUser />
-              {truncatedName}
-            </button>
-            {showMenu ? (
-              <div className="account-menu">
-                <button
-                  onClick={() => {
-                    auth.events
-                      .onLogout()
-                      .then(() => {
-                        setShowMenu(false);
-                      })
-                      .catch((e) => console.log(e));
-                  }}
-                  type="button"
-                  className="logout"
-                >
-                  <FaRightFromBracket /> Sair
-                </button>
-              </div>
-            ) : (
-              <></>
-            )}
-          </div>
+          <button
+            onClick={() => {
+              setShowMenu(!showMenu);
+            }}
+            type="button"
+            className={`account-login-indicator__button ${showMenu ? "account-login-indicator__button--open" : ""}`}
+          >
+            <FaUser />
+            {truncatedName}
+          </button>
+          {showMenu ? (
+            <div className="account-login-indicator__menu">
+              <button
+                className="account-login-indicator__button account-login-indicator__button--menu account-login-indicator__button--logout"
+                onClick={() => {
+                  auth.events
+                    .onLogout()
+                    .then(() => {
+                      setShowMenu(false);
+                    })
+                    .catch((e) => console.log(e));
+                }}
+                type="button"
+              >
+                <FaRightFromBracket /> Sair
+              </button>
+            </div>
+          ) : (
+            <></>
+          )}
         </>
       ) : (
-        <Link to="/login" className="account-login-indicator login">
+        <Link to="/login" className="account-login-indicator__button">
           <FaRightToBracket />
-          <span className="login-indicator-text">Entrar</span>
+          Entrar
         </Link>
       )}
-    </>
+    </div>
   );
 };

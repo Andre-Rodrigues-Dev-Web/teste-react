@@ -3,47 +3,48 @@
   min-width: 7rem;
   box-shadow: 0px 0px 16px 2px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  &.login,
-  .account-button,
-  .account-menu button {
-    display: flex;
-    align-items: center;
-    border: none;
-    background-color: var(--theme-base);
-    color: var(--theme-text);
-    padding: 0.6rem 1rem;
-    gap: 0.5rem;
-    width: 100%;
-    cursor: pointer;
-    text-wrap: none;
-    justify-content: center;
-
-    &:hover {
-      background-color: color-mix(in srgb, var(--theme-base) 90%, black 10%);
-    }
+}
+.account-login-indicator__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-wrap: none;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--theme-base);
+  color: var(--theme-text);
+  padding: 0.6rem 1rem;
+  gap: 0.5rem;
+  width: 100%;
+  cursor: pointer;
+  &:hover {
+    background-color: color-mix(in srgb, var(--theme-base) 90%, black 10%);
   }
-  .account-button {
-    border-radius: 8px;
-    &.open {
-      border-radius: 8px 8px 0 0;
-    }
+}
+.account-login-indicator__button--menu {
+  border-top: 1px solid var(--theme-surface1);
+}
+.account-login-indicator__button--logout {
+  color: var(--theme-red);
+}
+.account-login-indicator__button--open {
+  border-radius: 8px 8px 0 0;
+}
+.account-login-indicator__menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-shadow: 0px 8px 16px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 8px 8px;
+  background-color: var(--theme-base);
+  color: var(--theme-text);
+  .account-login-indicator__button {
+    border-radius: 0;
   }
-  .account-menu {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    box-shadow: 0px 8px 16px 2px rgba(0, 0, 0, 0.2);
+  .account-login-indicator__button:last-child {
     border-radius: 0 0 8px 8px;
-    button {
-      flex-grow: 1;
-      border-top: 1px solid var(--theme-surface1);
-      &.logout {
-        color: var(--theme-red);
-      }
-    }
-    button:last-child {
-      border-radius: 0 0 8px 8px;
-    }
   }
 }

@@ -2,37 +2,31 @@
   color: var(--theme-text);
   display: flex;
   flex-direction: column;
-  header {
-    height: 6rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.2rem;
-    padding: 0 5%;
-    width: 100%;
-    nav {
-      display: flex;
-      width: clamp(12rem, 20%, 16rem);
-      .navigation {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-      }
-    }
-    .header-right {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      .themes {
-        .theme-options {
-          display: flex;
-          justify-content: space-evenly;
-        }
-      }
-    }
-  }
+}
+.app__header {
+  height: 6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 0 5%;
+  width: 100%;
+}
+.app__navigation {
+  display: flex;
+  width: clamp(12rem, 20%, 16rem);
+}
+.app__navigation-list {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.app__header-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 a {
   text-decoration: none;

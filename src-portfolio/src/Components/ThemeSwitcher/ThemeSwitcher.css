@@ -11,14 +11,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  &.theme-light:hover {
-    background-color: #dce0e8;
-    color: #df8e1d;
-    border: none;
-  }
-  &.theme-dark:hover {
-    background-color: #181926;
-    color: #cad3f5;
-    border: none;
-  }
+}
+.theme-button:hover {
+  border: none;
+}
+.theme-button--dark:hover {
+  background-color: #181926;
+  color: #cad3f5;
+}
+.theme-button--light:hover {
+  background-color: #dce0e8;
+  color: #df8e1d;
 }

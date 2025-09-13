@@ -59,9 +59,9 @@ export const App = () => {
     <AuthContext value={authContext}>
       <ThemeContext value={theme}>
         <div className="app">
-          <header>
-            <nav>
-              <ul className="navigation">
+          <header className="app__header">
+            <nav className="app__navigation">
+              <ul className="navigation app__navigation-list">
                 <li>
                   <UnderlineLink route to="/">
                     Portfólio
@@ -74,23 +74,21 @@ export const App = () => {
                 </li>
               </ul>
             </nav>
-            <div className="header-right">
+            <div className="app__header-right">
               <div className="themes">
-                <div className="theme-options">
-                  {theme === "dark" ? (
-                    <ThemeSwitcher
-                      Icon={FaSun}
-                      themeName="light"
-                      onClick={onThemeChange}
-                    />
-                  ) : (
-                    <ThemeSwitcher
-                      Icon={FaMoon}
-                      themeName="dark"
-                      onClick={onThemeChange}
-                    />
-                  )}
-                </div>
+                {theme === "dark" ? (
+                  <ThemeSwitcher
+                    Icon={FaSun}
+                    themeName="light"
+                    onClick={onThemeChange}
+                  />
+                ) : (
+                  <ThemeSwitcher
+                    Icon={FaMoon}
+                    themeName="dark"
+                    onClick={onThemeChange}
+                  />
+                )}
               </div>
               <AccountLoginIndicator />
             </div>
