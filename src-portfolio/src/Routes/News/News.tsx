@@ -72,31 +72,34 @@ const NewsPage = () => {
 
   return (
     <div className="news">
-      <main>
-        <h1>
+      <main className="news__main">
+        <h1 className="news__page-title">
           <FaNewspaper /> Notícias
         </h1>
         {auth.userInfo ? (
           <form
-            className="news-form"
+            className="news__form"
             onSubmit={(e) => {
               e.preventDefault();
             }}
           >
             <button
               type="button"
-              className={`collapse ${!showNewForm ? "closed" : ""}`}
+              className={`news__form-collapse-button ${!showNewForm ? "news__form-collapse-button--closed" : ""}`}
               onClick={() => {
                 setShowNewForm(!showNewForm);
               }}
             >
-              <div className="collapse-indicator">
+              <div className="news__form-collapse-button-icon">
                 {showNewForm ? <FaSquareCaretDown /> : <FaSquareCaretRight />}
               </div>
               Nova Notícia
             </button>
-            <div className={`collapsible-form ${showNewForm ? "open" : ""}`}>
+            <div
+              className={`news__form-area ${showNewForm ? "news__form-area--open" : ""}`}
+            >
               <LabeledInput
+                className="news__form-input"
                 title="Título"
                 id="title-input"
                 value={title}
@@ -106,6 +109,7 @@ const NewsPage = () => {
                 }}
               />
               <LabeledInput
+                className="news__form-input"
                 title="Conteúdo"
                 id="content-input"
                 value={content}
@@ -118,6 +122,7 @@ const NewsPage = () => {
               />
 
               <Button
+                className="news__form-button"
                 type="submit"
                 onClick={() => {
                   onSave().catch((e) => {
@@ -160,47 +165,45 @@ const NewsPage = () => {
             content="Faça login para escrever e publicar notícias."
           />
         )}
-        <div className="published-news">
-          <h2>Notícias Publicadas</h2>
-          {loading ? (
-            <div>Carregando...</div>
-          ) : error ? (
-            <>
-              <InfoBanner
-                level="error"
-                title="Erro ao carregar notícias"
-                content={error.message}
-                details={error.details}
-              />
-            </>
-          ) : news.length === 0 ? (
+        <h2 className="news__page-subtitle">Notícias Publicadas</h2>
+        {loading ? (
+          <div>Carregando...</div>
+        ) : error ? (
+          <>
             <InfoBanner
-              level="information"
-              title="Sem notícias"
-              content="Não há notícias publicadas."
+              level="error"
+              title="Erro ao carregar notícias"
+              content={error.message}
+              details={error.details}
             />
-          ) : (
-            <>
-              <div className="news-container">
-                {news.map((news) => (
-                  <NewsItem
-                    key={news.id}
-                    news={news}
-                    showActions={
-                      !!auth.userInfo && news.author.id === auth.userInfo.id
-                    }
-                    onDelete={(id) => {
-                      onDelete(id);
-                    }}
-                    onEdit={(id) => {
-                      navigate(`/news/${id}/edit`);
-                    }}
-                  />
-                ))}
-              </div>
-            </>
-          )}
-        </div>
+          </>
+        ) : news.length === 0 ? (
+          <InfoBanner
+            level="information"
+            title="Sem notícias"
+            content="Não há notícias publicadas."
+          />
+        ) : (
+          <>
+            <div className="news__grid">
+              {news.map((news) => (
+                <NewsItem
+                  key={news.id}
+                  news={news}
+                  showActions={
+                    !!auth.userInfo && news.author.id === auth.userInfo.id
+                  }
+                  onDelete={(id) => {
+                    onDelete(id);
+                  }}
+                  onEdit={(id) => {
+                    navigate(`/news/${id}/edit`);
+                  }}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </main>
     </div>
   );

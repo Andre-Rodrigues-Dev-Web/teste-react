@@ -17,7 +17,7 @@ interface LinkProps {
 export const Button = (
   props: PropsWithChildren<BaseButtonProps & (ButtonProps | LinkProps)>,
 ) => {
-  const className = `button button-${props.color} ${props.className ?? ""}`;
+  const className = `button button--${props.color} ${props.className ?? ""}`;
 
   return props.type === "link" ? (
     <Link className={className} to={props.to} onClick={props.onClick}>

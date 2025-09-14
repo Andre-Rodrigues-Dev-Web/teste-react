@@ -32,33 +32,31 @@ const InfoIcon = ({ level }: { level: string }) => {
 export const InfoBanner = (props: PropsWithChildren<InfoBannerProps>) => {
   const [showDetails, setShowDetails] = useState(false);
   return (
-    <div className={`info-banner ${props.level}`}>
-      <div className="info-header">
-        <div className="info-icon">
-          <InfoIcon level={props.level} />{" "}
-        </div>
-        <div className="info-title">{props.title}</div>
+    <div className={`info-banner info-banner--${props.level}`}>
+      <div className="info-banner__header">
+        <InfoIcon level={props.level} />
+        {props.title}
       </div>
 
-      <div className="info-content">{props.content}</div>
+      <div className="info-banner__content">{props.content}</div>
       {!props.details ? (
         <></>
       ) : (
         <>
           <button
             type="button"
-            className="collapse-details"
+            className="info-banner__collapse-button"
             onClick={() => {
               setShowDetails(!showDetails);
             }}
           >
-            <div className="collapse-details-icon">
+            <div className="info-banner__collapse-icon">
               {showDetails ? <FaSquareCaretDown /> : <FaSquareCaretRight />}
             </div>{" "}
             Detalhes
           </button>
           <div
-            className={`collapsible-details ${showDetails ? "open-details" : ""}`}
+            className={`info-banner__details ${showDetails ? "info-banner__details--open" : ""}`}
           >
             {props.details}
           </div>

@@ -15,8 +15,9 @@ export const Login = ({ newAccount }: { newAccount?: boolean }) => {
 
   const auth = useContext(AuthContext);
   return (
-    <div className="login-container">
+    <div className="login">
       <form
+        className="login__form"
         onSubmit={(e) => {
           setLoading(true);
           setError(null);
@@ -45,6 +46,7 @@ export const Login = ({ newAccount }: { newAccount?: boolean }) => {
             id="name-input"
             value={name}
             placeholder="Nome"
+            className="login__input"
             onChange={(e) => {
               setName(e.target.value);
             }}
@@ -57,6 +59,7 @@ export const Login = ({ newAccount }: { newAccount?: boolean }) => {
           id="username-input"
           value={username}
           placeholder="Usuário"
+          className="login__input"
           onChange={(e) => {
             setUsername(e.target.value);
           }}
@@ -67,12 +70,13 @@ export const Login = ({ newAccount }: { newAccount?: boolean }) => {
           type="password"
           value={password}
           placeholder="Senha"
+          className="login__input"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
         />
-        <div className="login-button-row">
-          <Button type="submit" color="primary">
+        <div className="login__button-row">
+          <Button className="login__button" type="submit" color="primary">
             {newAccount ? "Criar conta" : "Entrar"}
           </Button>
 
@@ -80,6 +84,7 @@ export const Login = ({ newAccount }: { newAccount?: boolean }) => {
             type="link"
             color="secondary"
             to={newAccount ? "/login" : "/newAccount"}
+            className="login__button"
             onClick={() => {
               setError(null);
             }}
@@ -88,7 +93,7 @@ export const Login = ({ newAccount }: { newAccount?: boolean }) => {
           </Button>
         </div>
       </form>
-      <div className="status">
+      <div className="login__status">
         {loading ? (
           <>Carregando...</>
         ) : error ? (

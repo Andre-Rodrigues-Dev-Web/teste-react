@@ -1,60 +1,58 @@
 .single-news {
   display: flex;
   justify-content: center;
-  main {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .news-container {
-      width: 90%;
-      padding: 2rem;
-      background-color: var(--theme-base);
-      display: flex;
-      flex-direction: column;
-      .news-indicator {
-        display: flex;
-        align-items: center;
-        gap: 0.4rem;
-        font-size: 0.9rem;
-        color: var(--theme-subtext0);
-      }
-      .news-header {
-        margin-bottom: 1.5rem;
-        .info-row {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          color: var(--theme-subtext0);
-          .date-row {
-            display: flex;
-            gap: 0.5rem;
-          }
-          .author,
-          .date-row .created-date,
-          .date-row .updated-date {
-            display: flex;
-            align-items: center;
-            gap: 0.2rem;
-          }
-        }
-        .news-title {
-          gap: 0.5rem;
-          font-weight: bold;
-          font-size: 2.5rem;
-          word-break: break-word;
-          white-space: pre-wrap;
-        }
-      }
-      .news-content {
-        word-break: break-word;
-        white-space: pre-wrap;
-      }
-    }
-  }
-  .error {
-    display: flex;
-    justify-content: center;
-    width: 90%;
-  }
+}
+.single-news__error {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+}
+.single-news__main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.single-news__container {
+  width: 90%;
+}
+.single-news__indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--theme-subtext0);
+}
+.single-news__header {
+  margin-bottom: 1.5rem;
+}
+.single-news__news-title {
+  gap: 0.5rem;
+  font-weight: bold;
+  font-size: 2.5rem;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+.single-news__info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--theme-subtext0);
+}
+.single-news__date-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.single-news__info {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+.single-news__news-content {
+  word-break: break-word;
+  white-space: pre-wrap;
 }

@@ -64,6 +64,7 @@ export const EditNews = () => {
       ) : (
         <>
           <form
+            className="edit-news__form"
             onSubmit={(e) => {
               onSave();
               e.preventDefault();
@@ -76,6 +77,7 @@ export const EditNews = () => {
               id="title-input"
               type="text"
               value={title}
+              className="edit-news__input"
               onChange={(e) => {
                 setTitle(e.target.value);
               }}
@@ -86,23 +88,33 @@ export const EditNews = () => {
               id="content-input"
               rows={6}
               value={content}
+              className="edit-news__input"
               onChange={(e) => {
                 setContent(e.target.value);
               }}
               textarea
             />
 
-            <div className="form-button-row">
-              <Button type="submit" color="primary">
+            <div className="edit-news__button-row">
+              <Button
+                className="edit-news__button"
+                type="submit"
+                color="primary"
+              >
                 Salvar
               </Button>
 
-              <Button type="link" to="/news" color="secondary">
+              <Button
+                className="edit-news__button"
+                type="link"
+                to="/news"
+                color="secondary"
+              >
                 Cancelar
               </Button>
             </div>
           </form>
-          <div className="status">
+          <div className="edit-news__status">
             {sendingEdit ? (
               <>Carregando...</>
             ) : editError ? (

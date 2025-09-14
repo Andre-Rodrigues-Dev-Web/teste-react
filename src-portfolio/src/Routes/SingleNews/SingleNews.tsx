@@ -15,6 +15,7 @@ import {
 } from "react-icons/fa6";
 import { parseAPIError, type APIError } from "../../util";
 import { InfoBanner } from "../../Components/InfoBanner/InfoBanner";
+import { Surface } from "../../Components/Surface/Surface";
 dayjs.extend(localizedFormat);
 export const SingleNews = () => {
   const { id } = useParams();
@@ -42,9 +43,9 @@ export const SingleNews = () => {
   return (
     <div className="single-news">
       {loading ? (
-        <div className="loading"></div>
+        <div className="single-news__loading"></div>
       ) : error ? (
-        <div className="error">
+        <div className="single-news__error">
           <InfoBanner
             level="error"
             title="Erro ao carregar notícia"
@@ -53,21 +54,26 @@ export const SingleNews = () => {
           />
         </div>
       ) : news ? (
-        <main>
-          <div className="news-container">
-            <span className="news-indicator">
+        <main className="single-news__main">
+          <Surface
+            padding={2}
+            shadow
+            color="base"
+            className="single-news__container"
+          >
+            <span className="single-news__indicator">
               <FaNewspaper /> Notícia
             </span>
-            <div className="news-header">
-              <h1 className="news-title">{news.title}</h1>
-              <div className="info-row">
-                <div className="date-row">
-                  <div className="created-date">
+            <div className="single-news__header">
+              <h1 className="single-news__news-title">{news.title}</h1>
+              <div className="single-news__info-row">
+                <div className="single-news__date-row">
+                  <div className="single-news__info">
                     <FaCalendar />
                     {dayjs.unix(news.createdAt).locale("pt-br").format("LLL")}
                   </div>
                   {news.updatedAt ? (
-                    <div className="updated-date">
+                    <div className="single-news__info">
                       <FaPenToSquare />
                       {"Editado " +
                         dayjs
@@ -79,14 +85,14 @@ export const SingleNews = () => {
                     <></>
                   )}
                 </div>
-                <div className="author">
+                <div className="single-news__info">
                   <FaUser />
                   {news.author.name}
                 </div>
               </div>
             </div>
-            <span className="news-content">{news.content}</span>
-          </div>
+            <span className="single-news__news-content">{news.content}</span>
+          </Surface>
         </main>
       ) : (
         <></>

@@ -5,6 +5,7 @@ interface BaseLabeledInputProps {
   id: string;
   placeholder: string;
   value: string;
+  className?: string;
 }
 interface LabeledInputProps {
   textarea?: false;
@@ -22,10 +23,13 @@ export const LabeledInput = (
   props: BaseLabeledInputProps & (LabeledInputProps | LabeledTextareaProps),
 ) => {
   return (
-    <div className="labeled-input">
-      <label htmlFor={props.id}>{props.title}</label>
+    <div className={`labeled-input ${props.className ?? ""}`}>
+      <label className="labeled-input__label" htmlFor={props.id}>
+        {props.title}
+      </label>
       {props.textarea ? (
         <textarea
+          className="labeled-input__textarea"
           id={props.id}
           value={props.value}
           placeholder={props.placeholder}
@@ -34,6 +38,7 @@ export const LabeledInput = (
         />
       ) : (
         <input
+          className="labeled-input__input"
           type={props.type}
           id={props.id}
           value={props.value}

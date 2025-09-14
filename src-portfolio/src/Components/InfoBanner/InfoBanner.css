@@ -5,57 +5,58 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  .info-header {
-    font-weight: bolder;
-    display: flex;
-    align-items: center;
-    font-size: 1.15rem;
-    gap: 0.5rem;
+}
+
+.info-banner__header {
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  font-size: 1.15rem;
+  gap: 0.5rem;
+}
+.info-banner__content {
+  font-weight: 500;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+.info-banner--note {
+  background-color: var(--theme-base);
+  color: var(--theme-text);
+}
+.info-banner--information {
+  background-color: var(--theme-blue);
+  color: var(--theme-mantle);
+}
+.info-banner--warning {
+  background-color: var(--theme-yellow);
+  color: var(--theme-mantle);
+}
+.info-banner--error {
+  background-color: var(--theme-red);
+  color: var(--theme-mantle);
+}
+.info-banner__collapse-button {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bolder;
+  font-size: 1rem;
+  border: none;
+  background-color: inherit;
+  color: inherit;
+  &:hover {
+    cursor: pointer;
   }
-  .info-content {
-    font-weight: 500;
-    word-break: break-word;
-    white-space: pre-wrap;
-  }
-  &.note {
-    background-color: var(--theme-base);
-    color: var(--theme-text);
-  }
-  &.information {
-    background-color: var(--theme-blue);
-    color: var(--theme-mantle);
-  }
-  &.warning {
-    background-color: var(--theme-yellow);
-    color: var(--theme-mantle);
-  }
-  &.error {
-    background-color: var(--theme-red);
-    color: var(--theme-mantle);
-  }
-  .collapse-details {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: bolder;
-    font-size: 1rem;
-    border: none;
-    background-color: inherit;
-    color: inherit;
-    &:hover {
-      cursor: pointer;
-    }
-    .collapse-details-icon {
-      font-size: 1.15rem;
-    }
-  }
-  .collapsible-details {
-    display: none;
-    word-break: break-word;
-    white-space: pre-wrap;
-  }
-  .collapsible-details.open-details {
-    display: block;
-  }
+}
+.info-banner__collapse-icon {
+  font-size: 1.15rem;
+}
+.info-banner__details {
+  display: none;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+.info-banner__details--open {
+  display: block;
 }

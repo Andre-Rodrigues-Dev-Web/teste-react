@@ -28,44 +28,37 @@ export const NewsItem = (props: NewsItemProps) => {
   const truncatedContent = truncateText(props.news.content, 200);
   const truncatedTitle = truncateText(props.news.title, 150);
   return (
-    <div className={`news-item${showActionMenu ? " open" : ""}`}>
-      <Link to={`/news/${props.news.id}`} className="news-body">
-        <div className="news-info">
-          <div className="news-title-row">
-            <h2>{truncatedTitle}</h2>
-          </div>
-          <div className="news-authorship">
-            <div className="created-date">
-              {dayjs
-                .unix(props.news.createdAt)
-                .locale("pt-br")
-                .format("L, HH:mm")}
+    <div
+      className={`news-item ${showActionMenu ? "news-item--open-actions" : ""}`}
+    >
+      <Link to={`/news/${props.news.id}`} className="news-item__body">
+        <h2 className="news-item__title">{truncatedTitle}</h2>
+        <div className="news-item__authorship">
+          {dayjs.unix(props.news.createdAt).locale("pt-br").format("L, HH:mm")}
 
-              {props.news.updatedAt ? <> (Editado)</> : <></>}
-            </div>
-            <div className="separator">
-              <FaCircle size={"0.2rem"} />
-            </div>
-            <div className="author">{props.news.author.name}</div>
-          </div>
+          {props.news.updatedAt ? <> (Editado)</> : <></>}
+          <FaCircle size={"0.2rem"} />
+          {props.news.author.name}
         </div>
-        <div className="content">{truncatedContent}</div>
+        <div>{truncatedContent}</div>
       </Link>
       {!props.showActions ? (
         <></>
       ) : (
-        <div className="news-actions">
+        <div className="news-item__actions">
           <button
             type="button"
             onClick={() => setShowActionMenu(!showActionMenu)}
-            className={`collapse ${showActionMenu ? "" : "closed"}`}
+            className={`news-item__actions-collapse-button ${showActionMenu ? "" : "news-item__actions-collapse-button--closed"}`}
           >
             {showActionMenu ? <FaCaretDown /> : <FaCaretRight />}
             Ações
           </button>
-          <div className={`action-buttons${showActionMenu ? " open" : ""}`}>
+          <div
+            className={`news-item__action-list ${showActionMenu ? "news-item__action-list--open" : ""}`}
+          >
             <button
-              className="action-button"
+              className="news-item__action-button"
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
@@ -77,7 +70,7 @@ export const NewsItem = (props: NewsItemProps) => {
               Editar Notícia
             </button>
             <button
-              className="action-button delete"
+              className="news-item__action-button news-item__action-button--delete"
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
